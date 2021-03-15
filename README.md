@@ -6,9 +6,15 @@ Fauna is pet's digital health book, which connects pet owners and animal clinics
 Pet owners want digital access to their pet's welfare, where animal clinics want a way to remind and maintain contact with its customers. At present, this is done with physical documents, such as vaccinations, medical records and health books. Fauna wants to digitize this process and develop a solution that can help pet owners and animal clinics. Fauna must act as a link and provide reminders of veterinary visits, how often and what medicine the pet should have, be a central and professional discussion forum, as well as create insight into the pet's health treatment. 
 
 #List of MoSCoW prioritized requirements for the app
+
 As a pet owner, I must be able to login so I can access personal app content
+
 As a pet owner, I must be able to create a new calendar entry so I can be reminded later
+
 As a pet owner, I must be able to see a list of all my calendar entries so I can keep myself informed
+
 As a pet owner, I should be able to add other users to a calendar entry so I can share the responsibility
+
 As a pet owner, I should be able to add a category to a calendar entry so I can easily tell the context
+
 As a pet owner, I could be able to logout so another user can login
