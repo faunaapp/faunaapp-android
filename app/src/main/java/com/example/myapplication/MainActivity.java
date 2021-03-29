@@ -16,21 +16,5 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        int timeout = 2000;
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                finish();
-                Intent mainPage = new Intent(MainActivity.this, LogInActivity.class);
-                startActivity(mainPage);
-            }
-        }, timeout);
     }
 }
