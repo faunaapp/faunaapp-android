@@ -6,4 +6,7 @@
     <string name="email">Email</string>
     <string name="adgangskode">Adgangskode</string>
     <string name="log_ind">Log ind</string>
+    <string name="dog_picture">dog_picture</string>
+    <string name="forgot_password">Glemt adgangskode?</string>
+    <string name="create_account">Gå til tilmelding</string>
 </resources>

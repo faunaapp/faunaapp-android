@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/dog_fauna"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Basic">
+        android:theme="@style/DayTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
