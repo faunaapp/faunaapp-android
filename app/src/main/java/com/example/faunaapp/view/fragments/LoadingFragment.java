@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.faunaapp.view.fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import com.example.faunaapp.R;
 
 public class LoadingFragment extends Fragment {
     private View view;

@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/loading"
-        android:name="com.example.myapplication.LoadingFragment"
+        android:name="com.example.faunaapp.view.fragments.LoadingFragment"
         android:label="Fragment1" >
         <action
             android:id="@+id/action_loading_to_log_in"
@@ -14,6 +14,6 @@
     </fragment>
     <fragment
         android:id="@+id/log_in"
-        android:name="com.example.myapplication.LogInFragment"
+        android:name="com.example.faunaapp.view.fragments.LogInFragment"
         android:label="Fragment2" />
 </navigation>
