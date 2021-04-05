@@ -24,12 +24,6 @@ public class LoadingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.loading_fragment, container, false);
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -37,6 +31,6 @@ public class LoadingFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_loading_to_log_in);
             }
         }, 3000);
-
+        return view;
     }
 }

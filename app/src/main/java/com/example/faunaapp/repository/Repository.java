@@ -1,6 +1,7 @@
 package com.example.faunaapp.repository;
 
 import android.os.AsyncTask;
+import android.os.Handler;
 
 import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
@@ -10,13 +11,16 @@ import com.faunaapp.graphql.LogInMutation;
 
 import org.jetbrains.annotations.NotNull;
 
-public class Repository
-{
+
+public class Repository {
     private static Repository instance;
+    private LogInAsyncTask logInAsyncTask;
     private static ApolloClient apolloClient;
 
     public Repository() {
         apolloClient = ApolloClient.builder().serverUrl("https://fauna-android-feature-t-cillum.herokuapp.com/").build();
+
+        logInAsyncTask = new LogInAsyncTask();
     }
 
     public static Repository getInstance() {
@@ -26,25 +30,24 @@ public class Repository
     }
 
 
-
-
-
-
     // log in
     public void logIn(String email, String password) {
-        new LogInAsyncTask().doInBackground(email, password);
+        logInAsyncTask.doInBackground(email, password);
     }
-    public String getToken(){
-        return LogInAsyncTask.getToken();
+
+    public synchronized String getToken() {
+        String token;
+        token = logInAsyncTask.getToken();
+
+        return token;
     }
 
 
-    private static class LogInAsyncTask extends AsyncTask<String, Void, Void>
-    {
+    private static class LogInAsyncTask extends AsyncTask<String, Void, Void> {
         private static String token = "";
+
         @Override
-        protected Void doInBackground(String... strings)
-        {
+        protected synchronized Void doInBackground(String... strings) {
             apolloClient.mutate(new LogInMutation(strings[0], strings[1])).enqueue(new ApolloCall.Callback<LogInMutation.Data>() {
                 @Override
                 public void onResponse(@NotNull Response<LogInMutation.Data> response) {
@@ -60,11 +63,16 @@ public class Repository
 
                 }
             });
-
+            notify();
             return null;
         }
 
-        public static String getToken(){
+        public synchronized String getToken() {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             return token;
         }
     }

@@ -70,21 +70,29 @@ public class LogInFragment extends Fragment {
 
     private void setUpObserver() {
         logInViewModel.getErrorMessage().observe(getViewLifecycleOwner(), errorMessage -> {
-            if (!errorMessage.equals("")) {
-             Snackbar snackbar = Snackbar.make(logInView, errorMessage, Snackbar.LENGTH_LONG).setAction("Retry", view -> {
-                });
-             snackbar.setTextColor(Color.RED);
-             snackbar.show();
-            }
+            setSnackbar(errorMessage);
         });
 
         logInViewModel.getToken().observe(getViewLifecycleOwner(), token-> {
+            if(token.equals("No token provided"))
+            {
+               setSnackbar("Please, provide a valid email and password");
+               return;
+            }
             System.out.println("Token is here: " + token);
             SharedPreferences.Editor editor = localStorage.edit();
             editor.putString("token", token);
             editor.apply();
-
         });
+    }
+
+    private void setSnackbar(String errorMessage) {
+        if (!errorMessage.equals("")) {
+         Snackbar snackbar = Snackbar.make(logInView, errorMessage, Snackbar.LENGTH_LONG).setAction("Retry", view -> {
+            });
+         snackbar.setTextColor(Color.RED);
+         snackbar.show();
+        }
     }
 
 
