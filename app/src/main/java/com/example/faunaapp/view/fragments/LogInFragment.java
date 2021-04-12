@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.faunaapp.R;
 import com.example.faunaapp.view_model.LogInFragmentViewModel;
@@ -41,7 +42,7 @@ public class LogInFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        logInView = inflater.inflate(R.layout.log_in_fragment, container, false);
+        logInView = inflater.inflate(R.layout.login_fragment, container, false);
         initializeFragmentsValues();
         logInButton.setOnClickListener(view -> {
             logInViewModel.logIn(Objects.requireNonNull(email.getEditText()).getText().toString(), Objects.requireNonNull(password.getEditText()).getText().toString());
@@ -50,14 +51,15 @@ public class LogInFragment extends Fragment {
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStart() {
+        super.onStart();
+        localStorage.getString("token", "no token");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        localStorage.getString("token", "no token");
+       localStorage.getString("token", "no token");
     }
 
     private void initializeFragmentsValues() {
@@ -79,10 +81,10 @@ public class LogInFragment extends Fragment {
                setSnackbar("Please, provide a valid email and password");
                return;
             }
-            System.out.println("Token is here: " + token);
             SharedPreferences.Editor editor = localStorage.edit();
             editor.putString("token", token);
             editor.apply();
+            Navigation.findNavController(logInView).navigate(R.id.action_log_in_to_allCalendarEntriesFragment);
         });
     }
 
@@ -94,6 +96,4 @@ public class LogInFragment extends Fragment {
          snackbar.show();
         }
     }
-
-
 }

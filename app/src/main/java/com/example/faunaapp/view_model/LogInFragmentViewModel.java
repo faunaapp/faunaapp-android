@@ -1,42 +1,35 @@
 package com.example.faunaapp.view_model;
 
-import android.os.AsyncTask;
-import android.os.Handler;
-import android.os.Looper;
-
-import androidx.core.os.HandlerCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.apollographql.apollo.ApolloCall;
-import com.apollographql.apollo.ApolloClient;
-import com.apollographql.apollo.api.Response;
-import com.apollographql.apollo.exception.ApolloException;
-import com.example.faunaapp.repository.Repository;
-import com.faunaapp.graphql.LogInMutation;
-
-import org.jetbrains.annotations.NotNull;
+import com.example.faunaapp.Client;
+import com.example.faunaapp.ClientComponent;
+import com.example.faunaapp.DaggerClientComponent;
+import com.example.faunaapp.Model.ILogInModel;
+import com.example.faunaapp.Model.LogInModel;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javax.xml.transform.Result;
-
 public class LogInFragmentViewModel extends ViewModel {
     private MutableLiveData<String> errorMessage;
     private String errorConstructor;
-    private Repository repository;
+    private ILogInModel logInModel;
     private ExecutorService executorService;
     private MutableLiveData<String> token;
+    private Client client;
 
 
     public LogInFragmentViewModel() {
-        repository = Repository.getInstance();
         errorMessage = new MutableLiveData<>();
         token = new MediatorLiveData<>();
+        ClientComponent component = DaggerClientComponent.create();
+        client = component.getClient();
         executorService = Executors.newFixedThreadPool(2);
+        logInModel = new LogInModel(client);
     }
 
     public LiveData<String> getErrorMessage() {
@@ -44,15 +37,14 @@ public class LogInFragmentViewModel extends ViewModel {
     }
 
     public LiveData<String> getToken() {
-
         return token;
     }
 
     public void logIn(String email, String password) {
         if (checkIfEmailAndPasswordExists(email, password)) {
             executorService.execute( () -> {
-                repository.logIn(email, password);
-                token.postValue(repository.getToken());
+                logInModel.logIn(email, password);
+                token.postValue(logInModel.getToken());
             });
         }
     }

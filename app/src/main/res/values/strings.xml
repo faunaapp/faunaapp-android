@@ -9,4 +9,6 @@
     <string name="dog_picture">dog_picture</string>
     <string name="forgot_password">Glemt adgangskode?</string>
     <string name="create_account">Gå til tilmelding</string>
+    <string name="kommende_aftaler">Kommende aftaler</string>
+    <string name="tidligere_aftaler">Tidligere aftaler</string>
 </resources>
