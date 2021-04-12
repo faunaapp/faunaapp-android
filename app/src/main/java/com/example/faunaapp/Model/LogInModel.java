@@ -1,48 +1,35 @@
-package com.example.faunaapp.repository;
+package com.example.faunaapp.Model;
 
 import android.os.AsyncTask;
-import android.os.Handler;
 
 import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
+import com.example.faunaapp.Client;
 import com.faunaapp.graphql.LogInMutation;
 
 import org.jetbrains.annotations.NotNull;
 
 
-public class Repository {
-    private static Repository instance;
+public class LogInModel implements ILogInModel {
     private LogInAsyncTask logInAsyncTask;
     private static ApolloClient apolloClient;
 
-    public Repository() {
-        apolloClient = ApolloClient.builder().serverUrl("https://fauna-android-feature-t-cillum.herokuapp.com/").build();
-
+    public LogInModel(Client client) {
+        apolloClient = client.getClient();
         logInAsyncTask = new LogInAsyncTask();
     }
 
-    public static Repository getInstance() {
-        if (instance == null)
-            instance = new Repository();
-        return instance;
-    }
-
-
-    // log in
+    @Override
     public void logIn(String email, String password) {
         logInAsyncTask.doInBackground(email, password);
     }
 
-    public synchronized String getToken() {
-        String token;
-        token = logInAsyncTask.getToken();
-
-        return token;
+    @Override
+    public String getToken() {
+        return  logInAsyncTask.getToken();
     }
-
-
     private static class LogInAsyncTask extends AsyncTask<String, Void, Void> {
         private static String token = "";
 
@@ -68,13 +55,7 @@ public class Repository {
         }
 
         public synchronized String getToken() {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             return token;
         }
     }
 }
-
