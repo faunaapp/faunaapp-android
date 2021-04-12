@@ -1,7 +1,6 @@
 package com.example.faunaapp.view.fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +8,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 
 import com.example.faunaapp.R;
 
-public class LoadingFragment extends Fragment {
-    private View loadingView;
+public class AddEntryFragmentView extends Fragment {
+    private View addEntryView;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,14 +22,8 @@ public class LoadingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        loadingView = inflater.inflate(R.layout.loading_fragment, container, false);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Navigation.findNavController(loadingView).navigate(R.id.action_loading_to_log_in);
-            }
-        }, 3000);
-        return loadingView;
+        addEntryView = inflater.inflate(R.layout.add_entry_fragment, container, false);
+
+        return addEntryView;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.faunaapp.Model;
+package com.example.faunaapp.model;
 
 import android.os.AsyncTask;
 
@@ -6,7 +6,7 @@ import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
-import com.example.faunaapp.Client;
+import com.example.faunaapp.client.Client;
 import com.faunaapp.graphql.LogInMutation;
 
 import org.jetbrains.annotations.NotNull;

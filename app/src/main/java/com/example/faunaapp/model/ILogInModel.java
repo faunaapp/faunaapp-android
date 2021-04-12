@@ -1,4 +1,4 @@
-package com.example.faunaapp.Model;
+package com.example.faunaapp.model;
 
 public interface ILogInModel {
     void logIn(String email, String password);

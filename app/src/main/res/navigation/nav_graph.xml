@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/loading"
-        android:name="com.example.faunaapp.view.fragments.LoadingFragment"
+        android:name="com.example.faunaapp.view.fragments.LoadingFragmentView"
         android:label="log_in_fragment">
         <action
             android:id="@+id/action_loading_to_log_in"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/log_in"
-        android:name="com.example.faunaapp.view.fragments.LogInFragment"
+        android:name="com.example.faunaapp.view.fragments.LogInFragmentView"
         android:label="log_in_fragment">
         <action
             android:id="@+id/action_log_in_to_allCalendarEntriesFragment"
@@ -23,6 +23,14 @@
     </fragment>
     <fragment
         android:id="@+id/allCalendarEntriesFragment"
-        android:name="com.example.faunaapp.view.fragments.AllCalendarEntriesFragment"
-        android:label="AllCalendarEntriesFragment" />
+        android:name="com.example.faunaapp.view.fragments.AllCalendarEntriesFragmentView"
+        android:label="AllCalendarEntriesFragment" >
+        <action
+            android:id="@+id/action_allCalendarEntriesFragment_to_addEntryFragmentView"
+            app:destination="@id/addEntryFragmentView" />
+    </fragment>
+    <fragment
+        android:id="@+id/addEntryFragmentView"
+        android:name="com.example.faunaapp.view.fragments.AddEntryFragmentView"
+        android:label="AddEntryFragmentView" />
 </navigation>

@@ -5,11 +5,11 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.faunaapp.Client;
-import com.example.faunaapp.ClientComponent;
-import com.example.faunaapp.DaggerClientComponent;
-import com.example.faunaapp.Model.ILogInModel;
-import com.example.faunaapp.Model.LogInModel;
+import com.example.faunaapp.client.Client;
+import com.example.faunaapp.client.ClientComponent;
+import com.example.faunaapp.client.DaggerClientComponent;
+import com.example.faunaapp.model.ILogInModel;
+import com.example.faunaapp.model.LogInModel;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -24,7 +24,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Objects;
 
-public class LogInFragment extends Fragment {
+public class LogInFragmentView extends Fragment {
 
 
     private Button logInButton;

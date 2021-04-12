@@ -1,4 +1,4 @@
-package com.example.faunaapp;
+package com.example.faunaapp.client;
 
 import com.apollographql.apollo.ApolloClient;
 
