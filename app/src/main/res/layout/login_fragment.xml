@@ -31,7 +31,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/emailInput"
+        android:id="@+id/headingInput"
         android:inputType="textNoSuggestions"
         android:layout_width="220dp"
         android:layout_height="52dp"
@@ -49,7 +49,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordInput"
+        android:id="@+id/titleInput"
         android:inputType="textNoSuggestions"
         android:layout_width="220dp"
         android:layout_height="52dp"
@@ -59,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailInput">
+        app:layout_constraintTop_toBottomOf="@+id/headingInput">
 
                 <com.google.android.material.textfield.TextInputEditText
                    android:layout_width="match_parent"
@@ -75,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordInput"
+        app:layout_constraintTop_toBottomOf="@+id/titleInput"
         app:layout_constraintVertical_bias="0.133" />
 
     <com.google.android.material.button.MaterialButton
