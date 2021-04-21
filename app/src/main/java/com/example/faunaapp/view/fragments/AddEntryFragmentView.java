@@ -1,7 +1,10 @@
 package com.example.faunaapp.view.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.navigation.Navigation;
 
 import com.example.faunaapp.DTO.Entry;
 import com.example.faunaapp.Helper.Helper;
 import com.example.faunaapp.R;
+import com.example.faunaapp.view.activities.MainActivity;
 import com.example.faunaapp.view_model.AddEntryFragmentViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
@@ -55,8 +60,11 @@ public class AddEntryFragmentView extends Fragment {
             timePickerFragment.show(requireActivity().getSupportFragmentManager(), "timePicker");
         });
         saveButton.setOnClickListener(view -> {
-            Entry entry = new Entry(headingTextInput.getEditText().getText().toString(),titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(),dateButton.getText().toString(), timeButton.getText().toString() );
-          addEntryFragmentViewModel.submitTheEntry(entry);
+            SharedPreferences prefs = ((MainActivity)getActivity()).getTokenStorage();
+            String token = prefs.getString("token", "No token provided");
+            Log.i("Tag", token);
+            Entry entry = new Entry(headingTextInput.getEditText().getText().toString(),titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(),dateButton.getText().toString(), timeButton.getText().toString(),token);
+           addEntryFragmentViewModel.submitTheEntry(entry);
         });
 
         return addEntryView;
@@ -114,7 +122,13 @@ public class AddEntryFragmentView extends Fragment {
             timeButton.setText(time);
         });
         addEntryFragmentViewModel.getError().observe(getViewLifecycleOwner(), error -> {
-            Helper.setSnackbar(addEntryView, error);
+            if(error.equals(""))
+            {
+                Navigation.findNavController(addEntryView).navigate(R.id.action_addEntryFragmentView_to_allCalendarEntriesFragment);
+            }
+            else {
+                Helper.setSnackbar(addEntryView, error);
+            }
         });
     }
 }

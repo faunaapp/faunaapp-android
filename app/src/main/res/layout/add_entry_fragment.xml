@@ -33,6 +33,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:text="blablabla"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -53,6 +54,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:text="bigBlaBla"
                     android:layout_height="match_parent"
                     android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -162,7 +164,7 @@
         android:layout_width="142dp"
         android:layout_height="78dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/teal_900"
+        android:backgroundTint="@color/teal_700"
         android:contentDescription="@string/add_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +176,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/teal_600"
+        android:backgroundTint="@color/teal_700"
         android:text="@string/opret_p_mindelse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

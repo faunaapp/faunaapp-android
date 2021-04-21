@@ -21,6 +21,7 @@ public class LogInFragmentViewModel extends ViewModel {
     private ExecutorService executorService;
     private MutableLiveData<String> token;
     private Client client;
+    private String tokenString;
 
 
     public LogInFragmentViewModel() {
@@ -42,9 +43,17 @@ public class LogInFragmentViewModel extends ViewModel {
 
     public void logIn(String email, String password) {
         if (checkIfEmailAndPasswordExists(email, password)) {
-            executorService.execute( () -> {
-                logInModel.logIn(email, password);
-                token.postValue(logInModel.getToken());
+            executorService.execute(() -> {
+                    logInModel.logIn(email, password);
+                    while (true)
+                    {
+                        tokenString = logInModel.getToken();
+                        if(!tokenString.equals(""))
+                        {
+                            token.postValue(tokenString);
+                            break;
+                        }
+                    }
             });
         }
     }

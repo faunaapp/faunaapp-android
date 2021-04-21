@@ -1,9 +1,10 @@
 package com.example.faunaapp.view.fragments;
 
-import android.content.Context;
+
+import android.app.Activity;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import androidx.navigation.Navigation;
 
 import com.example.faunaapp.Helper.Helper;
 import com.example.faunaapp.R;
+import com.example.faunaapp.view.activities.MainActivity;
 import com.example.faunaapp.view_model.LogInFragmentViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -30,12 +32,11 @@ public class LogInFragmentView extends Fragment {
     private TextInputLayout email, password;
     private LogInFragmentViewModel logInViewModel;
     private View logInView;
-    private SharedPreferences localStorage;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        localStorage = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
     }
 
     @Nullable
@@ -52,13 +53,13 @@ public class LogInFragmentView extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        localStorage.getString("token", "no token");
+        ((MainActivity)getActivity()).getTokenStorage().getString("token", "no token");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-       localStorage.getString("token", "no token");
+        ((MainActivity)getActivity()).getTokenStorage().getString("token", "no token");
     }
 
     private void initializeFragmentsValues() {
@@ -80,7 +81,8 @@ public class LogInFragmentView extends Fragment {
                Helper.setSnackbar(logInView,"Please, provide a valid email and password");
                return;
             }
-            SharedPreferences.Editor editor = localStorage.edit();
+            Log.i("Tag", token);
+            SharedPreferences.Editor editor =  ((MainActivity)getActivity()).getTokenStorage().edit();
             editor.putString("token", token);
             editor.apply();
             Navigation.findNavController(logInView).navigate(R.id.action_log_in_to_allCalendarEntriesFragment);

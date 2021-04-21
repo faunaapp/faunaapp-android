@@ -32,5 +32,9 @@
     <fragment
         android:id="@+id/addEntryFragmentView"
         android:name="com.example.faunaapp.view.fragments.AddEntryFragmentView"
-        android:label="AddEntryFragmentView" />
+        android:label="AddEntryFragmentView" >
+        <action
+            android:id="@+id/action_addEntryFragmentView_to_allCalendarEntriesFragment"
+            app:destination="@id/allCalendarEntriesFragment" />
+    </fragment>
 </navigation>

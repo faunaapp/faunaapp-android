@@ -1,12 +1,29 @@
 package com.example.faunaapp.DTO;
 
 public class Entry {
-    private String heading, title, description, date, time;
+    private String heading, title, description, date, time, token;
 
-    public Entry(String heading, String title, String description, String date, String time) {
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public Entry(String heading, String title, String description, String date, String time, String token) {
+        this(heading, title, description, date, time);
+        this.token = token;
+    }
+    public Entry(String heading, String title, String description, String date, String time)
+    {
+        this(heading, title, date, time);
+        this.description = description;
+    }
+    public Entry(String heading, String title,  String date, String time)
+    {
         this.heading = heading;
         this.title = title;
-        this.description = description;
         this.date = date;
         this.time = time;
     }
