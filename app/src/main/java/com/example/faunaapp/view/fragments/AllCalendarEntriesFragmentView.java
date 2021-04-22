@@ -20,6 +20,7 @@ import com.example.faunaapp.view_model.AllCalendarEntriesFragmentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class AllCalendarEntriesFragmentView extends Fragment {
@@ -41,6 +42,7 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         addButton.setOnClickListener( view -> {
             Navigation.findNavController(allCalendarEntriesView).navigate(R.id.action_allCalendarEntriesFragment_to_addEntryFragmentView);
         });
+
         return allCalendarEntriesView;
     }
 
@@ -48,24 +50,52 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         allCalendarEntriesFragmentViewModel = new ViewModelProvider(this).get(AllCalendarEntriesFragmentViewModel.class);
         addButton =  allCalendarEntriesView.findViewById(R.id.add_button);
         futureAppointemtsRecyclerView = allCalendarEntriesView.findViewById(R.id.futureAppointments);
-        allCalendarEntriesFragmentViewModel.getAllTasks();
-        setUpRecyclerView(futureAppointemtsRecyclerView);
         pastAppointmentsRecyclerView = allCalendarEntriesView.findViewById(R.id.pastAppointments);
-        setUpRecyclerView(pastAppointmentsRecyclerView);
+        allCalendarEntriesFragmentViewModel.getAllTasks();
+        setUpObserver();
     }
 
-    private void setUpRecyclerView(RecyclerView recyclerView) {
-        List<Entry> entries = new ArrayList<>();
-        entries.add(new Entry("Heading", "Important title", "Descriptive description", "23/02/2020", "13 : 00", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZUBmYXVuYWFwcC5kayIsImlhdCI6MTYxODkwODE1NSwiZXhwIjoxNjUwMDEyMTU1fQ.X-WvMpYd-PFBvX7qDNCgYBr2ZI1hJ68LydFUQWgw8Xk"));
-        entries.add(new Entry("Heading", "Important title", "Descriptive description", "19/02/2020", "7 : 00", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZUBmYXVuYWFwcC5kayIsImlhdCI6MTYxODkwODE1NSwiZXhwIjoxNjUwMDEyMTU1fQ.X-WvMpYd-PFBvX7qDNCgYBr2ZI1hJ68LydFUQWgw8Xk"));
-        entries.add(new Entry("Heading", "Important title", "Descriptive description", "19/02/2020", "8 : 00", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZUBmYXVuYWFwcC5kayIsImlhdCI6MTYxODkwODE1NSwiZXhwIjoxNjUwMDEyMTU1fQ.X-WvMpYd-PFBvX7qDNCgYBr2ZI1hJ68LydFUQWgw8Xk"));
-        entries.add(new Entry("Heading", "Important title", "Descriptive description", "19/02/2020", "7 : 00", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZUBmYXVuYWFwcC5kayIsImlhdCI6MTYxODkwODE1NSwiZXhwIjoxNjUwMDEyMTU1fQ.X-WvMpYd-PFBvX7qDNCgYBr2ZI1hJ68LydFUQWgw8Xk"));
-        entries.add(new Entry("Heading", "Important title", "Descriptive description", "19/02/2020", "7 : 00", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZUBmYXVuYWFwcC5kayIsImlhdCI6MTYxODkwODE1NSwiZXhwIjoxNjUwMDEyMTU1fQ.X-WvMpYd-PFBvX7qDNCgYBr2ZI1hJ68LydFUQWgw8Xk"));
-        entries.add(new Entry("Heading", "Important title", "Descriptive description", "19/02/2020", "7 : 00", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJhbGljZUBmYXVuYWFwcC5kayIsImlhdCI6MTYxODkwODE1NSwiZXhwIjoxNjUwMDEyMTU1fQ.X-WvMpYd-PFBvX7qDNCgYBr2ZI1hJ68LydFUQWgw8Xk"));
+    private void setUpRecyclerView(RecyclerView recyclerView, List<Entry> entries) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.hasFixedSize();
 
         EntriesAdapter entriesAdapter = new EntriesAdapter(entries);
         recyclerView.setAdapter(entriesAdapter);
+    }
+
+    private void setUpObserver(){
+        allCalendarEntriesFragmentViewModel.getEntry().observe(getViewLifecycleOwner(), list ->{
+            ArrayList<Entry> futureAppointments = new ArrayList<>();
+            ArrayList<Entry> pastAppointments = new ArrayList<>();
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+            int currentDay = Calendar.getInstance().get(Calendar.DATE);
+            int currentHour = Calendar.getInstance().get(Calendar.HOUR);
+            int currentMinute = Calendar.getInstance().get(Calendar.MINUTE);
+            for (int i = 0; i < list.size(); i++) {
+                String [] date = list.get(i).getDate().split("/");
+                int year  = Integer.parseInt(date[2]);
+                int month = Integer.parseInt(date[1]);
+                int day = Integer.parseInt(date[0]);
+
+                String [] time = list.get(i).getTime().split(":");
+                int hours = Integer.parseInt(time[0]);
+                int minutes = Integer.parseInt(time[1]);
+
+
+                if(year < currentYear || (year == currentYear && month < currentMonth) || (year == currentYear && month == currentMonth && day < currentDay) ||
+                        (year == currentYear && month == currentMonth && day == currentDay && hours < currentHour) ||
+                        (year == currentYear && month == currentMonth && day == currentDay && hours == currentHour && minutes < currentMinute)  )
+                {
+                    pastAppointments.add(list.get(i));
+                }
+                else
+                {
+                    futureAppointments.add(list.get(i));
+                }
+            }
+            setUpRecyclerView(futureAppointemtsRecyclerView, futureAppointments);
+            setUpRecyclerView(pastAppointmentsRecyclerView, pastAppointments);
+        });
     }
 }

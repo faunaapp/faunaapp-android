@@ -1,6 +1,11 @@
 package com.example.faunaapp.DTO;
 
-public class Entry {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class Entry implements Parcelable {
     private String heading, title, description, date, time, token;
 
     public void setToken(String token) {
@@ -66,5 +71,15 @@ public class Entry {
 
     public String getTime() {
         return time;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

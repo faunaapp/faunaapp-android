@@ -1,7 +1,6 @@
 package com.example.faunaapp.view.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +27,7 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.regex.Matcher;
 
 public class AddEntryFragmentView extends Fragment {
     private View addEntryView;
@@ -37,6 +37,8 @@ public class AddEntryFragmentView extends Fragment {
     private TextInputLayout headingTextInput, titleTextInput, noteTextInput;
     private AddEntryFragmentViewModel addEntryFragmentViewModel;
     private TimpePickerFragment timePickerFragment;
+    private Entry entryToSubmit;
+    private View allCalendarEntriesView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +49,9 @@ public class AddEntryFragmentView extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+         allCalendarEntriesView = inflater.inflate(R.layout.all_calendar_entries_fragment, container, false);
         addEntryView = inflater.inflate(R.layout.add_entry_fragment, container, false);
+
         initializeFragmentValues();
         timePickerFragment.setFragment(this);
         dateButton.setOnClickListener(view -> {
@@ -60,11 +64,12 @@ public class AddEntryFragmentView extends Fragment {
             timePickerFragment.show(requireActivity().getSupportFragmentManager(), "timePicker");
         });
         saveButton.setOnClickListener(view -> {
-            SharedPreferences prefs = ((MainActivity)getActivity()).getTokenStorage();
+            SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
             String token = prefs.getString("token", "No token provided");
             Log.i("Tag", token);
-            Entry entry = new Entry(headingTextInput.getEditText().getText().toString(),titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(),dateButton.getText().toString(), timeButton.getText().toString(),token);
-           addEntryFragmentViewModel.submitTheEntry(entry);
+            entryToSubmit = new Entry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), dateButton.getText().toString(), timeButton.getText().toString(), token);
+            MainActivity.setNewEntry(entryToSubmit);
+            addEntryFragmentViewModel.submitTheEntry(entryToSubmit);
         });
 
         return addEntryView;
@@ -80,7 +85,7 @@ public class AddEntryFragmentView extends Fragment {
         return formatter.format(calendar.getTime());
     }
 
-    public void chooseTime(String time){
+    public void chooseTime(String time) {
         addEntryFragmentViewModel.chooseTime(time);
     }
 
@@ -89,7 +94,6 @@ public class AddEntryFragmentView extends Fragment {
         setDateConstraint(dateBuilder);
         return dateBuilder.build();
     }
-
 
 
     private void setDateConstraint(MaterialDatePicker.Builder<Long> dateBuilder) {
@@ -115,18 +119,17 @@ public class AddEntryFragmentView extends Fragment {
     }
 
     private void setUpObserver() {
-        addEntryFragmentViewModel.getDate().observe(getViewLifecycleOwner(), date ->{
+        addEntryFragmentViewModel.getDate().observe(getViewLifecycleOwner(), date -> {
             dateButton.setText(date);
         });
         addEntryFragmentViewModel.getTime().observe(getViewLifecycleOwner(), time -> {
             timeButton.setText(time);
         });
         addEntryFragmentViewModel.getError().observe(getViewLifecycleOwner(), error -> {
-            if(error.equals(""))
-            {
+            if (error.equals("")) {
                 Navigation.findNavController(addEntryView).navigate(R.id.action_addEntryFragmentView_to_allCalendarEntriesFragment);
-            }
-            else {
+
+            } else {
                 Helper.setSnackbar(addEntryView, error);
             }
         });

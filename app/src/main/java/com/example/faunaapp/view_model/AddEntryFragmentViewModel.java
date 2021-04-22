@@ -11,7 +11,9 @@ import com.example.faunaapp.client.Client;
 import com.example.faunaapp.client.ClientComponent;
 import com.example.faunaapp.client.DaggerClientComponent;
 import com.example.faunaapp.model.AddEntryModel;
+import com.example.faunaapp.model.AllCalendarEntriesModel;
 import com.example.faunaapp.model.IAddEntryModel;
+import com.example.faunaapp.model.IAllCalendarEntriesModel;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +30,7 @@ public class AddEntryFragmentViewModel extends ViewModel {
     private MutableLiveData<String> date, time, error;
     private Client client;
     private IAddEntryModel entryModel;
+
 
 
     public AddEntryFragmentViewModel() {

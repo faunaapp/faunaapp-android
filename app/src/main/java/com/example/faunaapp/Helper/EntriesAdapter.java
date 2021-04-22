@@ -33,6 +33,8 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
     public void onBindViewHolder(@NonNull EntriesAdapter.ViewHolder holder, int position) {
        holder.date.setText(entries.get(position).getDate());
        holder.time.setText(entries.get(position).getTime());
+       holder.title.setText(entries.get(position).getTitle());
+       holder.content.setText(entries.get(position).getHeading());
     }
 
     @Override
@@ -41,12 +43,18 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
         return entries.size();
     }
 
+    public List<Entry> getEntries() {
+        return entries;
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView date, time;
+        TextView date, time, title, content;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             date = itemView.findViewById(R.id.date);
             time = itemView.findViewById(R.id.time);
+            title = itemView.findViewById(R.id.title);
+            content = itemView.findViewById(R.id.content);
         }
     }
 }

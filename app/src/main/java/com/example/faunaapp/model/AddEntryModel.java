@@ -26,6 +26,7 @@ public class AddEntryModel implements IAddEntryModel {
     private static ApolloClient apolloClient;
     private CreateTaskAsync createTaskAsync;
 
+
     public AddEntryModel(Client client) {
         apolloClient = client.getClient();
         createTaskAsync = new CreateTaskAsync();
