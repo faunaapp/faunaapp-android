@@ -1,6 +1,7 @@
 package com.example.faunaapp.view.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.Helper.CustomMessageEvent;
 import com.example.faunaapp.Helper.EntriesAdapter;
 import com.example.faunaapp.R;
 import com.example.faunaapp.view_model.AllCalendarEntriesFragmentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,8 +37,14 @@ public class AllCalendarEntriesFragmentView extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
     }
 
+    @Subscribe
+    public void onEvent(CustomMessageEvent event)
+    {
+        Log.i("BLA", "bLABLA" + event.getEntry().getDate());
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
