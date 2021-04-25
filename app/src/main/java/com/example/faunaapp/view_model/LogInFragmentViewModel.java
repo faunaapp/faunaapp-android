@@ -5,11 +5,15 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.faunaapp.Events.TokenEvent;
 import com.example.faunaapp.client.Client;
 import com.example.faunaapp.client.ClientComponent;
 import com.example.faunaapp.client.DaggerClientComponent;
 import com.example.faunaapp.model.ILogInModel;
 import com.example.faunaapp.model.LogInModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,10 +25,11 @@ public class LogInFragmentViewModel extends ViewModel {
     private ExecutorService executorService;
     private MutableLiveData<String> token;
     private Client client;
-    private String tokenString;
 
 
     public LogInFragmentViewModel() {
+
+        EventBus.getDefault().register(this);
         errorMessage = new MutableLiveData<>();
         token = new MediatorLiveData<>();
         ClientComponent component = DaggerClientComponent.create();
@@ -41,20 +46,17 @@ public class LogInFragmentViewModel extends ViewModel {
         return token;
     }
 
+    @Subscribe
+    public void onTokenEvent(TokenEvent tokenEvent)
+    {
+        token.setValue(tokenEvent.getToken());
+    }
+
+
+
     public void logIn(String email, String password) {
         if (checkIfEmailAndPasswordExists(email, password)) {
-            executorService.execute(() -> {
-                    logInModel.logIn(email, password);
-                    while (true)
-                    {
-                        tokenString = logInModel.getToken();
-                        if(!tokenString.equals(""))
-                        {
-                            token.postValue(tokenString);
-                            break;
-                        }
-                    }
-            });
+            logInModel.logIn(email, password);
         }
     }
 
@@ -72,4 +74,6 @@ public class LogInFragmentViewModel extends ViewModel {
         errorMessage.postValue(errorConstructor);
         return false;
     }
+
+
 }

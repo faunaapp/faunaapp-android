@@ -1,11 +1,12 @@
 package com.example.faunaapp.DTO;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
-
-public class Entry implements Parcelable {
+@Entity(tableName = "entry_table")
+public class Entry {
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     private String heading, title, description, date, time, token;
 
     public void setToken(String token) {
@@ -14,6 +15,17 @@ public class Entry implements Parcelable {
 
     public String getToken() {
         return token;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Entry() {
     }
 
     public Entry(String heading, String title, String description, String date, String time, String token) {
@@ -73,13 +85,4 @@ public class Entry implements Parcelable {
         return time;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-
-    }
 }

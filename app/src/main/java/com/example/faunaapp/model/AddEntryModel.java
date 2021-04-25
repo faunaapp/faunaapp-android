@@ -72,8 +72,7 @@ public class AddEntryModel implements IAddEntryModel {
         public enum Entry{
             DateTime(0),
             Content(1),
-            Title(2)
-            ;
+            Title(2);
             private final int value;
 
             Entry(int value) {

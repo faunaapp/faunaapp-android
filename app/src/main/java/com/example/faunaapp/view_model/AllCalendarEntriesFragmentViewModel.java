@@ -19,12 +19,20 @@ public class AllCalendarEntriesFragmentViewModel extends ViewModel {
     private MutableLiveData<ArrayList<Entry>> entries = new MutableLiveData<>();
     private Client client;
     private ExecutorService executorService;
+    private ArrayList<Entry> entr;
 
     public AllCalendarEntriesFragmentViewModel() {
         ClientComponent component = DaggerClientComponent.create();
         client = component.getClient();
        allCalendarEntriesModell = new AllCalendarEntriesModel(client);
         executorService = Executors.newFixedThreadPool(2);
+        entr = new ArrayList<>();
+    }
+
+    public void addToEntryList(Entry entry)
+    {
+        entr.add(entry);
+        entries.postValue(entr);
     }
 
     public MutableLiveData<ArrayList<Entry>> getEntry() {
@@ -33,9 +41,10 @@ public class AllCalendarEntriesFragmentViewModel extends ViewModel {
 
     public void getAllTasks(){
         executorService.execute(() -> {
-            ArrayList<Entry> entr = allCalendarEntriesModell.getAllEntries();
+            entr.addAll(allCalendarEntriesModell.getAllEntries());
+
             while (true) {
-                if(entr != null) {
+                if(entr != null && entr.size() != 0) {
                     entries.postValue(entr);
                 }
             }

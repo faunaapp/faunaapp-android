@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 
 import com.example.faunaapp.DTO.Entry;
-import com.example.faunaapp.Helper.CustomMessageEvent;
 import com.example.faunaapp.Helper.Helper;
 import com.example.faunaapp.R;
 import com.example.faunaapp.view.activities.MainActivity;
@@ -25,8 +24,6 @@ import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.textfield.TextInputLayout;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -70,10 +67,6 @@ public class AddEntryFragmentView extends Fragment {
             String token = prefs.getString("token", "No token provided");
             Log.i("Tag", token);
             entryToSubmit = new Entry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), dateButton.getText().toString(), timeButton.getText().toString(), token);
-            MainActivity.setNewEntry(entryToSubmit);
-            CustomMessageEvent event = new CustomMessageEvent();
-            event.setEntry(entryToSubmit);
-            EventBus.getDefault().post(event);
             addEntryFragmentViewModel.submitTheEntry(entryToSubmit);
         });
 

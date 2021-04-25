@@ -11,17 +11,9 @@ import com.example.faunaapp.client.Client;
 
 public class MainActivity extends AppCompatActivity {
    private SharedPreferences prefs;
-   private static Entry newEntry;
+
 
     public MainActivity() {
-    }
-
-    public static void setNewEntry(Entry Entry) {
-        newEntry = Entry;
-    }
-
-    public static Entry getNewEntry() {
-        return newEntry;
     }
 
     public SharedPreferences getTokenStorage() {

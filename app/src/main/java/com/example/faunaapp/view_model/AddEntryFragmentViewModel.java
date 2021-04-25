@@ -1,28 +1,20 @@
 package com.example.faunaapp.view_model;
 
-import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-import androidx.navigation.Navigation;
 
 import com.example.faunaapp.DTO.Entry;
 import com.example.faunaapp.client.Client;
 import com.example.faunaapp.client.ClientComponent;
 import com.example.faunaapp.client.DaggerClientComponent;
 import com.example.faunaapp.model.AddEntryModel;
-import com.example.faunaapp.model.AllCalendarEntriesModel;
 import com.example.faunaapp.model.IAddEntryModel;
-import com.example.faunaapp.model.IAllCalendarEntriesModel;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import kotlin.text.Regex;
 
 public class AddEntryFragmentViewModel extends ViewModel {
     private String constantDateText, constantTimeText;
