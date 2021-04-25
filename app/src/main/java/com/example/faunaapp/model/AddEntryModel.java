@@ -6,20 +6,13 @@ import android.util.Log;
 import com.apollographql.apollo.ApolloCall;import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
-import com.apollographql.apollo.request.RequestHeaders;
 import com.example.faunaapp.DTO.Entry;
-import com.example.faunaapp.Helper.EntriesAdapter;
 import com.example.faunaapp.client.Client;
 import com.faunaapp.graphql.CreateTaskMutation;
 import com.faunaapp.graphql.type.Category;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 import java.util.TimeZone;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import kotlin.text.Regex;
 
 public class AddEntryModel implements IAddEntryModel {
 

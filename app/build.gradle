@@ -48,8 +48,6 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.4'
     implementation 'androidx.navigation:navigation-ui:2.3.4'
-    implementation 'com.google.dagger:dagger:2.5'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.5'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation("com.apollographql.apollo:apollo-runtime:2.5.5")
     implementation 'com.apollographql.apollo:apollo-http-cache:2.5.5'
@@ -57,7 +55,12 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'org.greenrobot:eventbus:3.2.0'
-    
+    def daggerVer = 2.27 // or latest version
+
+    implementation "com.google.dagger:dagger:$daggerVer"
+    implementation "com.google.dagger:dagger-android-support:$daggerVer"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$daggerVer"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVer"
     def room_version = "2.3.0"
 
     implementation "androidx.room:room-runtime:$room_version"

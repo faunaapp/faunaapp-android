@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.faunaapp.DTO.Entry;
-import com.example.faunaapp.Helper.EntriesAdapter;
+import com.example.faunaapp.adapters.EntriesAdapter;
 import com.example.faunaapp.R;
 import com.example.faunaapp.view_model.AllCalendarEntriesFragmentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -54,10 +54,11 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         addButton =  allCalendarEntriesView.findViewById(R.id.add_button);
         futureAppointemtsRecyclerView = allCalendarEntriesView.findViewById(R.id.futureAppointments);
         pastAppointmentsRecyclerView = allCalendarEntriesView.findViewById(R.id.pastAppointments);
+        setUpObserver();
         if(futureAppointments == null && pastAppointments == null) {
             allCalendarEntriesFragmentViewModel.getAllTasks();
         }
-        setUpObserver();
+
     }
 
     private void setUpRecyclerView(RecyclerView recyclerView, List<Entry> entries) {
