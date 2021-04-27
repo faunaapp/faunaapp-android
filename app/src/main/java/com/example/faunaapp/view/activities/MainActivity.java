@@ -18,7 +18,7 @@ import javax.inject.Inject;
 public class MainActivity extends AppCompatActivity {
    private SharedPreferences prefs;
    @Inject
-   private IEntryRepository entryRepository;
+   public IEntryRepository entryRepository;
 
 
     public SharedPreferences getTokenStorage() {

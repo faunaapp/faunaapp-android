@@ -1,53 +1,60 @@
 package com.example.faunaapp.view_model;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.Events.EntriesEvent;
+import com.example.faunaapp.Events.EntryEvent;
 import com.example.faunaapp.client.Client;
 import com.example.faunaapp.client.ClientComponent;
 import com.example.faunaapp.client.DaggerClientComponent;
 import com.example.faunaapp.model.AllCalendarEntriesModel;
 import com.example.faunaapp.model.IAllCalendarEntriesModel;
 
-import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import java.util.List;
 
 public class AllCalendarEntriesFragmentViewModel extends ViewModel {
     private IAllCalendarEntriesModel allCalendarEntriesModell;
-    private MutableLiveData<ArrayList<Entry>> entries = new MutableLiveData<>();
+    private MutableLiveData<List<Entry>> entries;
+    private MutableLiveData<Entry> newEntry;
     private Client client;
-    private ExecutorService executorService;
-    private ArrayList<Entry> entr;
 
     public AllCalendarEntriesFragmentViewModel() {
         ClientComponent component = DaggerClientComponent.create();
         client = component.getClient();
        allCalendarEntriesModell = new AllCalendarEntriesModel(client);
-        executorService = Executors.newFixedThreadPool(2);
-        entr = new ArrayList<>();
+        entries = new MutableLiveData<>();
+        newEntry = new MutableLiveData<>();
+        EventBus.getDefault().register(this);
     }
 
-    public void addToEntryList(Entry entry)
+    @Subscribe
+    public void onEntryEvent(EntriesEvent entriesEvent)
     {
-        entr.add(entry);
-        entries.postValue(entr);
+        entries.setValue(entriesEvent.getEntries());
     }
 
-    public MutableLiveData<ArrayList<Entry>> getEntry() {
+    @Subscribe
+    public void onNewEntryEvent(EntryEvent entryEvent)
+    {
+        newEntry.setValue(entryEvent.getEntry());
+    }
+
+
+
+    public LiveData<List<Entry>> getEntries() {
         return entries;
     }
 
-    public void getAllTasks(){
-        executorService.execute(() -> {
-            entr.addAll(allCalendarEntriesModell.getAllEntries());
+    public void getAllTasks(String token){
+            allCalendarEntriesModell.getAllEntries(token);
+    }
 
-            while (true) {
-                if(entr != null && entr.size() != 0) {
-                    entries.postValue(entr);
-                }
-            }
-        });
+    public LiveData<Entry> getNewEntry(){
+        return newEntry;
     }
 }

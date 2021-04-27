@@ -65,9 +65,8 @@ public class AddEntryFragmentView extends Fragment {
         saveButton.setOnClickListener(view -> {
             SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
             String token = prefs.getString("token", "No token provided");
-            Log.i("Tag", token);
-            entryToSubmit = new Entry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), dateButton.getText().toString(), timeButton.getText().toString(), token);
-            addEntryFragmentViewModel.submitTheEntry(entryToSubmit);
+            entryToSubmit = new Entry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), dateButton.getText().toString(), timeButton.getText().toString());
+            addEntryFragmentViewModel.submitTheEntry(entryToSubmit, token);
         });
 
         return addEntryView;

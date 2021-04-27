@@ -38,7 +38,7 @@ public class LogInModel implements ILogInModel {
 
     @Override
     public void logIn(String email, String password) {
-            logInAsyncTask.execute(email.trim(), password.trim());
+        logInAsyncTask.execute(email.trim(), password.trim());
 
     }
 
@@ -47,6 +47,7 @@ public class LogInModel implements ILogInModel {
 
         private Handler mainThreadHandler = HandlerCompat.createAsync(Looper.getMainLooper());
         private String token;
+
         @Override
         protected synchronized String doInBackground(String... strings) {
 
@@ -56,24 +57,23 @@ public class LogInModel implements ILogInModel {
                     Log.i("Tag", strings[0] + " : " + strings[1]);
                     Log.i("Tag", response + "");
 
-                        if (response.getData() == null) {
-                            token = "No token provided";
+                    if (response.getData() == null) {
+                        token = "No token provided";
                         //    notify();
 
-                            return;
-                        }
-                        token = response.getData().login().token();
-                        //notify();
-
+                        return;
                     }
+                    token = response.getData().login().token();
+                    //notify();
+
+                }
 
                 @Override
                 public void onFailure(@NotNull ApolloException e) {
 
                 }
             });
-            while(token == null)
-            {
+            while (token == null) {
 
             }
             return token;
@@ -82,12 +82,9 @@ public class LogInModel implements ILogInModel {
         @Override
         protected void onPostExecute(String string) {
             super.onPostExecute(string);
-            mainThreadHandler.post(()->{
-                TokenEvent event = new TokenEvent();
-                event.setToken(string);
-                EventBus.getDefault().post(event);
-            });
-
+            TokenEvent event = new TokenEvent();
+            event.setToken(string);
+            EventBus.getDefault().post(event);
         }
     }
 }

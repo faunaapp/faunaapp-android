@@ -12,10 +12,12 @@ import com.example.faunaapp.view.activities.MainActivity;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import dagger.Provides;
 
 @Singleton
 @Component(dependencies = {}, modules = {AppModule.class, RoomModule.class})
 public interface AppComponent {
+
     void inject(MainActivity mainActivity);
     EntryDao entryDao();
     FaunaappDatabase faunaDatabase();

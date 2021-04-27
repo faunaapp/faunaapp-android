@@ -1,6 +1,7 @@
 package com.example.faunaapp.DTO;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "entry_table")
@@ -28,15 +29,18 @@ public class Entry {
     public Entry() {
     }
 
+    @Ignore
     public Entry(String heading, String title, String description, String date, String time, String token) {
         this(heading, title, description, date, time);
         this.token = token;
     }
+    @Ignore
     public Entry(String heading, String title, String description, String date, String time)
     {
         this(heading, title, date, time);
         this.description = description;
     }
+    @Ignore
     public Entry(String heading, String title,  String date, String time)
     {
         this.heading = heading;
