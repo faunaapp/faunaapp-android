@@ -9,4 +9,20 @@
     <string name="dog_picture">dog_picture</string>
     <string name="forgot_password">Glemt adgangskode?</string>
     <string name="create_account">Gå til tilmelding</string>
+    <string name="kommende_aftaler">Kommende aftaler</string>
+    <string name="tidligere_aftaler">Tidligere aftaler</string>
+    <string name="lav_en_ny_p_mindelse">Lav en ny påmindelse</string>
+    <string name="overskrift">Overskrift</string>
+    <string name="emne">Emne</string>
+    <string name="button">Button</string>
+    <string name="dato_og_tidspunkt">Dato og tidspunkt</string>
+    <string name="noter">Noter</string>
+    <string name="v_lg_dato">Vælg dato</string>
+    <string name="tidspunkt">Tidspunkt</string>
+    <string name="tilf_j_billeder_eller_filer_til_aftalen">Tilføj billeder eller filer til aftalen</string>
+    <string name="add_image">Add image</string>
+    <string name="opret_p_mindelse">Opret påmindelse</string>
+    <string name="hundefris_r">Hundefrisør</string>
+    <string name="pelspleje">Pelspleje</string>
+    <string name="lorem_ipsum_dolor_sit_ame">Lorem ipsum dolor sit ame</string>
 </resources>

@@ -13,8 +13,8 @@ import androidx.navigation.Navigation;
 
 import com.example.faunaapp.R;
 
-public class LoadingFragment extends Fragment {
-    private View view;
+public class LoadingFragmentView extends Fragment {
+    private View loadingView;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,14 +23,14 @@ public class LoadingFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.loading_fragment, container, false);
+        loadingView = inflater.inflate(R.layout.loading_fragment, container, false);
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Navigation.findNavController(view).navigate(R.id.action_loading_to_log_in);
+                Navigation.findNavController(loadingView).navigate(R.id.action_loading_to_log_in);
             }
         }, 3000);
-        return view;
+        return loadingView;
     }
 }
