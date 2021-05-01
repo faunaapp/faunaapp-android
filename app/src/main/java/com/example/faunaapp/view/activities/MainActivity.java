@@ -20,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
    @Inject
    public IEntryRepository entryRepository;
 
-
     public SharedPreferences getTokenStorage() {
         return prefs;
     }
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Client.updateActivity(this);
         prefs = getSharedPreferences("tokenStorage", MODE_PRIVATE);
-
         DaggerAppComponent.builder().appModule(new AppModule(getApplication())).roomModule(new RoomModule(getApplication())).build().inject(this);
 
 
