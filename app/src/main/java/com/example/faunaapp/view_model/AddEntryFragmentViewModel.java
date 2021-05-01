@@ -46,7 +46,7 @@ public class AddEntryFragmentViewModel extends ViewModel {
         this.time.postValue(constantTimeText + "\n" + time);
     }
 
-    public void submitTheEntry(Entry entry) {
+    public void submitTheEntry(Entry entry, String token) {
         String errorMessage = getErrorIfExists(entry);
         if(!errorMessage.equals(""))
         {
@@ -57,7 +57,7 @@ public class AddEntryFragmentViewModel extends ViewModel {
         entry.setDate(entry.getDate().substring(entry.getDate().lastIndexOf("\n") + 1));
         entry.setTime(entry.getTime().substring(entry.getTime().lastIndexOf("\n") + 1));
         executorService.execute(() -> {
-            entryModel.submit(entry);
+            entryModel.submit(entry, token);
         });
     }
 

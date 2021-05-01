@@ -21,11 +21,6 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
         this.entries = entries;
     }
 
-    public void addEntry(Entry entry)
-    {
-        entries.add(entry);
-    }
-
     @NonNull
     @Override
     public EntriesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

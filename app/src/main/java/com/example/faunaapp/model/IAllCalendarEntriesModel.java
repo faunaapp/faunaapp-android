@@ -8,5 +8,5 @@ import java.util.ArrayList;
 
 public interface IAllCalendarEntriesModel {
 
-    ArrayList<Entry> getAllEntries();
+    void getAllEntries(String token);
 }

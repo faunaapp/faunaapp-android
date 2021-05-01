@@ -6,10 +6,16 @@ import android.util.Log;
 import com.apollographql.apollo.ApolloCall;import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
+import com.apollographql.apollo.request.RequestHeaders;
 import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.Events.EntriesEvent;
+import com.example.faunaapp.Events.EntryEvent;
+import com.example.faunaapp.Helper.Helper;
 import com.example.faunaapp.client.Client;
 import com.faunaapp.graphql.CreateTaskMutation;
 import com.faunaapp.graphql.type.Category;
+
+import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.TimeZone;
@@ -27,8 +33,8 @@ public class AddEntryModel implements IAddEntryModel {
 
 
     @Override
-    public void submit(Entry entry) {
-      createTaskAsync.doInBackground(getISO8601Format(entry.getDate(), entry.getTime()), entry.getHeading(),entry.getTitle(),Category.MEDICINE.toString());
+    public void submit(Entry entry, String token) {
+      createTaskAsync.execute(token, getISO8601Format(entry.getDate(), entry.getTime()), entry.getHeading(),entry.getTitle(),Category.MEDICINE.toString());
     }
 
     private String getISO8601Format(String date, String time) {
@@ -61,31 +67,38 @@ public class AddEntryModel implements IAddEntryModel {
         return dateTimeBuilder.toString();
     }
 
-    private static class CreateTaskAsync extends AsyncTask<String, Void, Void> {
-        public enum Entry{
-            DateTime(0),
-            Content(1),
-            Title(2);
+    private static class CreateTaskAsync extends AsyncTask<String, Void, Entry> {
+        private Entry newEntry;
+        public enum EntryIterator {
+            Token(0),
+            DateTime(1),
+            Content(2),
+            Title(3);
             private final int value;
 
-            Entry(int value) {
+            EntryIterator(int value) {
                 this.value = value;
             }
 
             public int getValue() {
                 return value;
             }
+
+
         }
 
         @Override
-        protected synchronized Void doInBackground(String... strings) {
-
-            apolloClient.mutate(new CreateTaskMutation(strings[Entry.DateTime.getValue()], strings[Entry.Content.getValue()], strings[Entry.Title.getValue()], Category.APPOINTMENT))
+        protected synchronized Entry doInBackground(String... strings) {
+            Log.i("Tag", strings[EntryIterator.Token.getValue()] + " : " + strings[EntryIterator.DateTime.getValue()] + " : " + strings[EntryIterator.Content.getValue()] + " : " + strings[EntryIterator.Title.getValue()]);
+            apolloClient.mutate(new CreateTaskMutation(strings[EntryIterator.DateTime.getValue()], strings[EntryIterator.Content.getValue()], strings[EntryIterator.Title.getValue()], Category.APPOINTMENT))
+                    .toBuilder().requestHeaders(RequestHeaders.builder().addHeader("authorization", strings[0]).build()).build()
                    .enqueue(new ApolloCall.Callback<CreateTaskMutation.Data>(){
 
                 @Override
                 public void onResponse(@NotNull Response<CreateTaskMutation.Data> response) {
-
+                    String date = Helper.getDateAndTimeFromISO8601(strings[EntryIterator.DateTime.getValue()]).first;
+                    String time = Helper.getDateAndTimeFromISO8601(strings[EntryIterator.DateTime.getValue()]).second;
+                      newEntry = new Entry(strings[EntryIterator.Content.getValue()], strings[EntryIterator.Title.getValue()], "Something important", date,time);
                 }
 
                 @Override
@@ -93,7 +106,20 @@ public class AddEntryModel implements IAddEntryModel {
                     Log.i("Tag", "Exception: " + e.getLocalizedMessage());
                 }
             });
-            return null;
+
+            while (newEntry == null)
+            {
+
+            }
+            return newEntry;
+
+        }
+        @Override
+        protected void onPostExecute(Entry entry) {
+            super.onPostExecute(entry);
+            EntryEvent entryEvent = new EntryEvent();
+            entryEvent.setEntry(entry);
+            EventBus.getDefault().post(entryEvent);
         }
 }
 }

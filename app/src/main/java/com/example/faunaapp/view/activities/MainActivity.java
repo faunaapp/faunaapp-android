@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
    @Inject
     IEntryRepository entryRepository;
 
-
     public SharedPreferences getTokenStorage() {
         return prefs;
     }

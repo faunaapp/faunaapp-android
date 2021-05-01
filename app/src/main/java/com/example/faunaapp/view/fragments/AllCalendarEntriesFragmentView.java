@@ -1,6 +1,8 @@
 package com.example.faunaapp.view.fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.faunaapp.DTO.Entry;
 import com.example.faunaapp.adapters.EntriesAdapter;
 import com.example.faunaapp.R;
+import com.example.faunaapp.view.activities.MainActivity;
 import com.example.faunaapp.view_model.AllCalendarEntriesFragmentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -56,7 +59,9 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         pastAppointmentsRecyclerView = allCalendarEntriesView.findViewById(R.id.pastAppointments);
         setUpObserver();
         if(futureAppointments == null && pastAppointments == null) {
-            allCalendarEntriesFragmentViewModel.getAllTasks();
+            SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
+            String token = prefs.getString("token", "No token provided");
+            allCalendarEntriesFragmentViewModel.getAllTasks(token);
         }
 
     }
@@ -70,8 +75,12 @@ public class AllCalendarEntriesFragmentView extends Fragment {
     }
 
     private void setUpObserver(){
-        allCalendarEntriesFragmentViewModel.getEntry().observe(getViewLifecycleOwner(), list ->{
+        allCalendarEntriesFragmentViewModel.getEntries().observe(getViewLifecycleOwner(), list ->{
             configureAppointments(list);
+            setUpRecycleViews();
+        });
+        allCalendarEntriesFragmentViewModel.getNewEntry().observe(getViewLifecycleOwner(), entry-> {
+            futureAppointments.add(entry);
             setUpRecycleViews();
         });
     }
@@ -81,7 +90,7 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         setUpRecyclerView(pastAppointmentsRecyclerView, pastAppointments);
     }
 
-    private void configureAppointments(ArrayList<Entry> list) {
+    private void configureAppointments(List<Entry> list) {
 
         if(futureAppointments == null && pastAppointments == null) {
             futureAppointments = new ArrayList<>();
@@ -100,7 +109,7 @@ public class AllCalendarEntriesFragmentView extends Fragment {
 
     private boolean hasToGoToThePastAppointment(Entry entry) {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH);
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
         int currentDay = Calendar.getInstance().get(Calendar.DATE);
         int currentHour = Calendar.getInstance().get(Calendar.HOUR);
         int currentMinute = Calendar.getInstance().get(Calendar.MINUTE);
