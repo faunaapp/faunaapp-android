@@ -1,11 +1,9 @@
 package com.example.faunaapp.model;
 
 import android.os.AsyncTask;
-import android.service.autofill.FieldClassification;
 import android.util.Log;
 
 import androidx.core.util.Pair;
-import androidx.lifecycle.MutableLiveData;
 
 import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.ApolloClient;
@@ -17,7 +15,6 @@ import com.faunaapp.graphql.GetTasksQuery;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.faunaapp.DTO.Entry;
 import com.example.faunaapp.client.Client;
 import com.example.faunaapp.client.ClientComponent;
+
 import com.example.faunaapp.client.DaggerClientComponent;
 import com.example.faunaapp.model.AddEntryModel;
 import com.example.faunaapp.model.IAddEntryModel;

@@ -1,12 +1,13 @@
-package com.example.faunaapp.Repository;
+package com.example.faunaapp.repository;
 
 import android.app.Application;
 
-import com.example.faunaapp.Repository.DAO.EntryDao;
-import com.example.faunaapp.Repository.DAO.FaunaappDatabase;
-import com.example.faunaapp.Repository.DAO.IEntryRepository;
-import com.example.faunaapp.Repository.Moldule.AppModule;
-import com.example.faunaapp.Repository.Moldule.RoomModule;
+
+import com.example.faunaapp.repository.DAO.EntryDao;
+import com.example.faunaapp.repository.DAO.FaunaappDatabase;
+import com.example.faunaapp.repository.DAO.IEntryRepository;
+import com.example.faunaapp.repository.Moldule.AppModule;
+import com.example.faunaapp.repository.Moldule.RoomModule;
 import com.example.faunaapp.view.activities.MainActivity;
 
 import javax.inject.Singleton;

@@ -7,18 +7,19 @@ import android.os.Bundle;
 
 import com.example.faunaapp.DTO.Entry;
 import com.example.faunaapp.R;
-import com.example.faunaapp.Repository.DAO.IEntryRepository;
-import com.example.faunaapp.Repository.DaggerAppComponent;
-import com.example.faunaapp.Repository.Moldule.AppModule;
-import com.example.faunaapp.Repository.Moldule.RoomModule;
+
 import com.example.faunaapp.client.Client;
+import com.example.faunaapp.repository.DAO.IEntryRepository;
+import com.example.faunaapp.repository.DaggerAppComponent;
+import com.example.faunaapp.repository.Moldule.AppModule;
+import com.example.faunaapp.repository.Moldule.RoomModule;
 
 import javax.inject.Inject;
 
 public class MainActivity extends AppCompatActivity {
    private SharedPreferences prefs;
    @Inject
-   private IEntryRepository entryRepository;
+    IEntryRepository entryRepository;
 
 
     public SharedPreferences getTokenStorage() {
@@ -31,10 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Client.updateActivity(this);
         prefs = getSharedPreferences("tokenStorage", MODE_PRIVATE);
-
         DaggerAppComponent.builder().appModule(new AppModule(getApplication())).roomModule(new RoomModule(getApplication())).build().inject(this);
-
-
     }
 
     public void insertEntry(Entry entry){

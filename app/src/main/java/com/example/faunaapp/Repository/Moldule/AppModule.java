@@ -1,4 +1,4 @@
-package com.example.faunaapp.Repository.Moldule;
+package com.example.faunaapp.repository.Moldule;
 
 import android.app.Application;
 
