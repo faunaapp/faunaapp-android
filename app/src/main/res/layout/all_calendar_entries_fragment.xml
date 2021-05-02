@@ -7,45 +7,45 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/fragment_all_calendar_entries_future_appointments_id"
         android:layout_width="173dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
-        android:text="@string/kommende_aftaler"
+        android:text="@string/fragment_all_calendar_entries_future_appointments_name"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/futureAppointments"
+        android:id="@+id/fragment_all_calendar_entries_futureAppointments_recycler_view_id"
         android:layout_width="348dp"
         android:layout_height="280dp"
         android:layout_marginTop="13dp"
         android:layout_marginBottom="88dp"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_all_calendar_entries_past_appointments_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_all_calendar_entries_future_appointments_id"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/fragment_all_calendar_entries_past_appointments_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tidligere_aftaler"
+        android:text="@string/fragment_all_calendar_entries_past_appointments_name"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_all_calendar_entries_future_appointments_id"
         app:layout_constraintVertical_bias="0.489" />
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pastAppointments"
+        android:id="@+id/fragment_all_calendar_entries_pastAppointments_recycler_view_id"
         android:layout_width="348dp"
         android:layout_height="280dp"
         android:layout_marginTop="22dp"
@@ -54,11 +54,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_all_calendar_entries_past_appointments_id"
         app:layout_constraintVertical_bias="0.264" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_button"
+        android:id="@+id/fragment_all_calendar_entries_button_add"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_gravity="bottom|end"

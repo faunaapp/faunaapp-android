@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/fragment_loading_image_view"
+        android:id="@+id/fragment_loading_dog_image_id"
         android:layout_width="304dp"
         android:layout_height="327dp"
         android:src="@mipmap/dog_fauna_foreground"

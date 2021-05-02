@@ -25,7 +25,7 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
     @Override
     public EntriesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.entry_item, parent, false);
+        View view = inflater.inflate(R.layout.task_entry_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -52,10 +52,10 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
         TextView date, time, title, content;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            date = itemView.findViewById(R.id.date);
-            time = itemView.findViewById(R.id.time);
-            title = itemView.findViewById(R.id.title);
-            content = itemView.findViewById(R.id.content);
+            date = itemView.findViewById(R.id.entry_item_title_template_text_date_id);
+            time = itemView.findViewById(R.id.entry_item_time_template_text_id);
+            title = itemView.findViewById(R.id.entry_item_title_id);
+            content = itemView.findViewById(R.id.entry_item_content_id);
         }
     }
 }

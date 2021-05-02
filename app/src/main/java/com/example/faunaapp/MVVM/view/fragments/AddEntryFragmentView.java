@@ -48,7 +48,7 @@ public class AddEntryFragmentView extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
          allCalendarEntriesView = inflater.inflate(R.layout.all_calendar_entries_fragment, container, false);
-        addEntryView = inflater.inflate(R.layout.add_entry_fragment, container, false);
+        addEntryView = inflater.inflate(R.layout.add_task_entry_fragment, container, false);
 
         initializeFragmentValues();
         timePickerFragment.setFragment(this);
@@ -102,12 +102,12 @@ public class AddEntryFragmentView extends Fragment {
 
     private void initializeFragmentValues() {
         fragmentManager = getActivity().getSupportFragmentManager();
-        dateButton = addEntryView.findViewById(R.id.dateButton);
-        timeButton = addEntryView.findViewById(R.id.timeButton);
-        headingTextInput = addEntryView.findViewById(R.id.headingInput);
-        titleTextInput = addEntryView.findViewById(R.id.titleInput);
-        noteTextInput = addEntryView.findViewById(R.id.noteInput);
-        saveButton = addEntryView.findViewById(R.id.saveButton);
+        dateButton = addEntryView.findViewById(R.id.fragment_add_task_entry_text_date_button_id);
+        timeButton = addEntryView.findViewById(R.id.fragment_add_task_entry_text_time_button_id);
+        headingTextInput = addEntryView.findViewById(R.id.fragment_add_task_entry_text_input_email_input_id);
+        titleTextInput = addEntryView.findViewById(R.id.fragment_add_task_entry_text_topic_input_id);
+        noteTextInput = addEntryView.findViewById(R.id.fragment_add_task_entry_textInput_note_input_id);
+        saveButton = addEntryView.findViewById(R.id.fragment_add_task_entry_save_button_id);
         datePicker = getDatePickers();
         addEntryFragmentViewModel = new AddEntryFragmentViewModel();
         timePickerFragment = new TimpePickerFragment();

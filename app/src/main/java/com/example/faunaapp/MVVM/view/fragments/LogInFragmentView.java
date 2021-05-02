@@ -62,9 +62,9 @@ public class LogInFragmentView extends Fragment {
 
     private void initializeFragmentsValues() {
         logInViewModel = new ViewModelProvider(this).get(LogInFragmentViewModel.class);
-        logInButton = logInView.findViewById(R.id.log_in_button);
-        email = logInView.findViewById(R.id.headingInput);
-        password = logInView.findViewById(R.id.titleInput);
+        logInButton = logInView.findViewById(R.id.fragment_login_button_login_id);
+        email = logInView.findViewById(R.id.fragment_add_task_entry_text_input_email_input_id);
+        password = logInView.findViewById(R.id.fragment_add_task_entry_text_topic_input_id);
         setUpObserver();
     }
 

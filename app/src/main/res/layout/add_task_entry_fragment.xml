@@ -6,20 +6,33 @@
     android:layout_height="match_parent">
 
 
+
+
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/fragment_add_entry_title_id"
         android:layout_width="194dp"
         android:layout_height="37dp"
         android:layout_marginTop="16dp"
-        android:text="@string/lav_en_ny_p_mindelse"
+        android:text="@string/fragment_add_entry_title_name"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/fragment_add_task_entry_heading_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/fragment_add_task_entry_heading_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_entry_title_id" />
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/headingInput"
+        android:id="@+id/fragment_add_task_entry_text_input_email_input_id"
         android:layout_width="327dp"
         android:layout_height="69dp"
         android:layout_marginTop="8dp"
@@ -30,16 +43,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.464"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5">
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_heading_id">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:text="blablabla"
+            android:text="@string/fragment_login_text_input_heading_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/fragment_add_task_entry_topic_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/fragment_add_task_entry_topic_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_input_email_input_id" />
+
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/titleInput"
+        android:id="@+id/fragment_add_task_entry_text_topic_input_id"
         android:layout_width="329dp"
         android:layout_height="70dp"
         android:layout_marginTop="8dp"
@@ -50,17 +75,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.475"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6">
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_topic_id">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:text="bigBlaBla"
+                    android:text="@string/fragment_add_task_entry_textInput_textEdit"
                     android:layout_height="match_parent"
                     android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/fragment_add_task_entry_text_note_input_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/fragment_add_task_entry_text_note_input_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_topic_input_id" />
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/noteInput"
+        android:id="@+id/fragment_add_task_entry_textInput_note_input_id"
         android:layout_width="332dp"
         android:layout_height="68dp"
         android:layout_marginTop="8dp"
@@ -71,7 +107,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7">
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_note_input_id">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -79,41 +115,13 @@
             android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/overskrift"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+
+
+
 
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/emne"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/headingInput" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/noter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleInput" />
-
-    <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/fragment_add_task_entry_text_date_and_time_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -121,10 +129,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/noteInput" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_textInput_note_input_id" />
 
     <Button
-        android:id="@+id/dateButton"
+        android:id="@+id/fragment_add_task_entry_text_date_button_id"
         android:layout_width="151dp"
         android:layout_height="93dp"
         android:layout_marginStart="40dp"
@@ -132,56 +140,56 @@
         android:drawableTop="@drawable/ic_calendar"
 
         android:drawableTint="@color/white_50"
-        android:text="@string/v_lg_dato"
+        android:text="@string/fragment_add_task_entry_text_date_button_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_date_and_time_id"
         />
 
     <Button
-        android:id="@+id/timeButton"
+        android:id="@+id/fragment_add_task_entry_text_time_button_id"
         android:layout_width="150dp"
         android:layout_height="90dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="40dp"
         android:drawableTop="@drawable/ic_time"
         android:drawableTint="@color/white_50"
-        android:text="@string/tidspunkt"
+        android:text="@string/fragment_add_task_entry_text_time_button_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_date_and_time_id" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/fragment_add_task_entry_text_add_photos_or_videos_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:text="@string/tilf_j_billeder_eller_filer_til_aftalen"
+        android:text="@string/fragment_add_task_entry_text_add_photos_or_videos_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeButton" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_time_button_id" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/fragment_add_task_entry_image_button_id"
         android:layout_width="142dp"
         android:layout_height="78dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/teal_700"
-        android:contentDescription="@string/add_image"
+        android:contentDescription="@string/fragment_add_task_entry_image_button_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_add_photos_or_videos_id"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
     <Button
-        android:id="@+id/saveButton"
+        android:id="@+id/fragment_add_task_entry_save_button_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/teal_700"
-        android:text="@string/opret_p_mindelse"
+        android:text="@string/fragment_add_task_entry_save_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_image_button_id"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

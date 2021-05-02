@@ -53,9 +53,9 @@ public class AllCalendarEntriesFragmentView extends Fragment {
 
     private void initializeFragmentsValues() {
         allCalendarEntriesFragmentViewModel = new ViewModelProvider(this).get(AllCalendarEntriesFragmentViewModel.class);
-        addButton =  allCalendarEntriesView.findViewById(R.id.add_button);
-        futureAppointemtsRecyclerView = allCalendarEntriesView.findViewById(R.id.futureAppointments);
-        pastAppointmentsRecyclerView = allCalendarEntriesView.findViewById(R.id.pastAppointments);
+        addButton =  allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_button_add);
+        futureAppointemtsRecyclerView = allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_futureAppointments_recycler_view_id);
+        pastAppointmentsRecyclerView = allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_pastAppointments_recycler_view_id);
         setUpObserver();
         if(futureAppointments == null && pastAppointments == null) {
             SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
