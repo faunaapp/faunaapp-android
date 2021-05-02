@@ -49,7 +49,7 @@ public class LogInFragmentViewModel extends ViewModel {
     @Subscribe
     public void onTokenEvent(TokenEvent tokenEvent)
     {
-        token.setValue(tokenEvent.getToken());
+        token.postValue(tokenEvent.getToken());
     }
 
     public void logIn(String email, String password) {

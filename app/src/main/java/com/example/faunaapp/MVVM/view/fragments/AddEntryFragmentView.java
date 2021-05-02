@@ -36,7 +36,6 @@ public class AddEntryFragmentView extends Fragment {
     private AddEntryFragmentViewModel addEntryFragmentViewModel;
     private TimpePickerFragment timePickerFragment;
     private TaskEntry taskEntryToSubmit;
-    private View allCalendarEntriesView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +46,7 @@ public class AddEntryFragmentView extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-         allCalendarEntriesView = inflater.inflate(R.layout.all_calendar_entries_fragment, container, false);
+
         addEntryView = inflater.inflate(R.layout.add_task_entry_fragment, container, false);
 
         initializeFragmentValues();
@@ -64,11 +63,17 @@ public class AddEntryFragmentView extends Fragment {
         saveButton.setOnClickListener(view -> {
             SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
             String token = prefs.getString("token", "No token provided");
-            taskEntryToSubmit = new TaskEntry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), dateButton.getText().toString(), timeButton.getText().toString());
+            taskEntryToSubmit = new TaskEntry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), getClearDateOrTime(dateButton.getText().toString()), getClearDateOrTime(timeButton.getText().toString()));
             addEntryFragmentViewModel.submitTheEntry(taskEntryToSubmit, token);
         });
 
         return addEntryView;
+    }
+
+    private String getClearDateOrTime(String text)
+    {
+       String clearData =  text.substring(text.lastIndexOf("\n") + 1);
+       return clearData;
     }
 
     public String getFormatDate(long milliSeconds, String dateFormat) {

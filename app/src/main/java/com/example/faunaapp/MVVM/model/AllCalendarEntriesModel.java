@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.apollographql.apollo.ApolloCall;
+import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.apollographql.apollo.request.RequestHeaders;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AllCalendarEntriesModel implements IAllCalendarEntriesModel {
-    private static com.apollographql.apollo.ApolloClient apolloClient;
+    private static ApolloClient apolloClient;
     private AllCalendarAsync allCalendarTaskAsync;
 
 
@@ -34,16 +35,27 @@ public class AllCalendarEntriesModel implements IAllCalendarEntriesModel {
         allCalendarTaskAsync.execute(token);
     }
 
-    private static class AllCalendarAsync extends AsyncTask<String, Void, ArrayList<TaskEntry>> {
+    private static class AllCalendarAsync extends AsyncTask<String, Void, Void> {
 
-        private boolean isBackgroundFinished = false;
         private  List<GetTasksQuery.Task> tasks;
+        public enum TaskEntryIterator {
+            Token(0);
+            private final int value;
+
+            TaskEntryIterator(int value) {
+                this.value = value;
+            }
+
+            public int getValue() {
+                return value;
+            }
+
+
+        }
         @Override
-        protected ArrayList<TaskEntry> doInBackground(String ... strings) {
+        protected Void doInBackground(String ... strings) {
             ArrayList<TaskEntry> entries = new ArrayList<>();
-
-
-            apolloClient.query(new GetTasksQuery()).toBuilder().requestHeaders(RequestHeaders.builder().addHeader("authorization", strings[0]).build()).build().enqueue(new ApolloCall.Callback<GetTasksQuery.Data>() {
+            apolloClient.query(new GetTasksQuery()).toBuilder().requestHeaders(RequestHeaders.builder().addHeader("authorization", strings[TaskEntryIterator.Token.getValue()]).build()).build().enqueue(new ApolloCall.Callback<GetTasksQuery.Data>() {
                 @Override
                 public void onResponse(@NotNull Response<GetTasksQuery.Data> response) {
                      tasks = response.getData().tasks();
@@ -57,10 +69,11 @@ public class AllCalendarEntriesModel implements IAllCalendarEntriesModel {
                             String time = Helper.getDateAndTimeFromISO8601(task.dateTime()).second;
                             entries.add(new TaskEntry(task.content(), task.title(), date, time));
                         }
+                        EntriesEvent event = new EntriesEvent();
+                        event.setEntries(entries);
+                        EventBus.getDefault().post(event);
                     }
-                    isBackgroundFinished = true;
                 }
-
 
 
                 @Override
@@ -68,21 +81,7 @@ public class AllCalendarEntriesModel implements IAllCalendarEntriesModel {
                     Log.i("Tag", e.getMessage());
                 }
             });
-           while (!isBackgroundFinished)
-           {
-
-           }
-            return entries;
+            return null;
         }
-
-        @Override
-        protected void onPostExecute(ArrayList<TaskEntry> entries) {
-            super.onPostExecute(entries);
-            EntriesEvent event = new EntriesEvent();
-            event.setEntries(entries);
-            EventBus.getDefault().post(event);
-        }
-
-
     }
 }

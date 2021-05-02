@@ -55,8 +55,6 @@ public class AddEntryFragmentViewModel extends ViewModel {
             return;
         }
         error.postValue("");
-        taskEntry.setDate(taskEntry.getDate().substring(taskEntry.getDate().lastIndexOf("\n") + 1));
-        taskEntry.setTime(taskEntry.getTime().substring(taskEntry.getTime().lastIndexOf("\n") + 1));
         executorService.execute(() -> {
             entryModel.submit(taskEntry, token);
         });

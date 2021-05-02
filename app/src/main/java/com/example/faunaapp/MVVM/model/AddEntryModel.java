@@ -68,14 +68,14 @@ public class AddEntryModel implements IAddEntryModel {
 
     private static class CreateTaskAsync extends AsyncTask<String, Void, TaskEntry> {
         private TaskEntry newTaskEntry;
-        public enum EntryIterator {
+        public enum TaskEntryIterator {
             Token(0),
             DateTime(1),
             Content(2),
             Title(3);
             private final int value;
 
-            EntryIterator(int value) {
+            TaskEntryIterator(int value) {
                 this.value = value;
             }
 
@@ -88,16 +88,16 @@ public class AddEntryModel implements IAddEntryModel {
 
         @Override
         protected synchronized TaskEntry doInBackground(String... strings) {
-            Log.i("Tag", strings[EntryIterator.Token.getValue()] + " : " + strings[EntryIterator.DateTime.getValue()] + " : " + strings[EntryIterator.Content.getValue()] + " : " + strings[EntryIterator.Title.getValue()]);
-            apolloClient.mutate(new CreateTaskMutation(strings[EntryIterator.DateTime.getValue()], strings[EntryIterator.Content.getValue()], strings[EntryIterator.Title.getValue()], Category.APPOINTMENT))
+            Log.i("Tag", strings[TaskEntryIterator.Token.getValue()] + " : " + strings[TaskEntryIterator.DateTime.getValue()] + " : " + strings[TaskEntryIterator.Content.getValue()] + " : " + strings[TaskEntryIterator.Title.getValue()]);
+            apolloClient.mutate(new CreateTaskMutation(strings[TaskEntryIterator.DateTime.getValue()], strings[TaskEntryIterator.Content.getValue()], strings[TaskEntryIterator.Title.getValue()], Category.APPOINTMENT))
                     .toBuilder().requestHeaders(RequestHeaders.builder().addHeader("authorization", strings[0]).build()).build()
                    .enqueue(new ApolloCall.Callback<CreateTaskMutation.Data>(){
 
                 @Override
                 public void onResponse(@NotNull Response<CreateTaskMutation.Data> response) {
-                    String date = Helper.getDateAndTimeFromISO8601(strings[EntryIterator.DateTime.getValue()]).first;
-                    String time = Helper.getDateAndTimeFromISO8601(strings[EntryIterator.DateTime.getValue()]).second;
-                      newTaskEntry = new TaskEntry(strings[EntryIterator.Content.getValue()], strings[EntryIterator.Title.getValue()], "Something important", date,time);
+                    String date = Helper.getDateAndTimeFromISO8601(strings[TaskEntryIterator.DateTime.getValue()]).first;
+                    String time = Helper.getDateAndTimeFromISO8601(strings[TaskEntryIterator.DateTime.getValue()]).second;
+                      newTaskEntry = new TaskEntry(strings[TaskEntryIterator.Content.getValue()], strings[TaskEntryIterator.Title.getValue()], "Something important", date,time);
                 }
 
                 @Override

@@ -26,7 +26,7 @@
     <string name="pelspleje">Pelspleje</string>
     <string name="lorem_ipsum_dolor_sit_ame">Lorem ipsum dolor sit ame</string>
     <string name="fragment_login_text_input_edit_template_text">alice@faunaapp.dk</string>
-    <string name="fragment_login_password_input_edit_template_text">1234t</string>
+    <string name="fragment_login_password_input_edit_template_text">1234</string>
     <string name="entry_item_title_template_text">Kloklip</string>
     <string name="entry_item_content_text">Title template</string>
     <string name="entry_item_title_template_date_text">Title template</string>

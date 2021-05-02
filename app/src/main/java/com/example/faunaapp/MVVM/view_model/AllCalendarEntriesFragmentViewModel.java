@@ -36,13 +36,13 @@ public class AllCalendarEntriesFragmentViewModel extends ViewModel {
     @Subscribe
     public void onEntryEvent(EntriesEvent entriesEvent)
     {
-        entries.setValue(entriesEvent.getEntries());
+        entries.postValue(entriesEvent.getEntries());
     }
 
     @Subscribe
     public void onNewEntryEvent(EntryEvent entryEvent)
     {
-        newEntry.setValue(entryEvent.getTaskEntry());
+        newEntry.postValue(entryEvent.getTaskEntry());
     }
 
 

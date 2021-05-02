@@ -14,7 +14,7 @@ public interface TaskEntryDao {
     @Insert
     void insert(TaskEntry taskEntry);
 
-    @Query("SELECT * FROM TaskEntry")
+    @Query("SELECT * FROM entry_table")
     LiveData<List<TaskEntry>> getAllEntries();
 
 }
