@@ -11,7 +11,7 @@
         android:theme="@style/DayTheme">
 
 
-        <activity android:name="com.example.faunaapp.view.activities.MainActivity">
+        <activity android:name=".MVVM.view.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
