@@ -1,7 +1,7 @@
 package com.example.faunaapp.MVVM.model;
 
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 
 public interface IAddEntryModel {
-    void submit(Entry entry, String token);
+    void submit(TaskEntry taskEntry, String token);
 }

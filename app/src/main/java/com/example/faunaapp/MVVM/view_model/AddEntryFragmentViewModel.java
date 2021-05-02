@@ -4,7 +4,7 @@ package com.example.faunaapp.MVVM.view_model;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
 
@@ -47,34 +47,34 @@ public class AddEntryFragmentViewModel extends ViewModel {
         this.time.postValue(constantTimeText + "\n" + time);
     }
 
-    public void submitTheEntry(Entry entry, String token) {
-        String errorMessage = getErrorIfExists(entry);
+    public void submitTheEntry(TaskEntry taskEntry, String token) {
+        String errorMessage = getErrorIfExists(taskEntry);
         if(!errorMessage.equals(""))
         {
             error.postValue(errorMessage);
             return;
         }
         error.postValue("");
-        entry.setDate(entry.getDate().substring(entry.getDate().lastIndexOf("\n") + 1));
-        entry.setTime(entry.getTime().substring(entry.getTime().lastIndexOf("\n") + 1));
+        taskEntry.setDate(taskEntry.getDate().substring(taskEntry.getDate().lastIndexOf("\n") + 1));
+        taskEntry.setTime(taskEntry.getTime().substring(taskEntry.getTime().lastIndexOf("\n") + 1));
         executorService.execute(() -> {
-            entryModel.submit(entry, token);
+            entryModel.submit(taskEntry, token);
         });
     }
 
-    private String getErrorIfExists(Entry entry) {
+    private String getErrorIfExists(TaskEntry taskEntry) {
         String errorMessage = "";
-        if (entry.getHeading().trim().equals("")) {
+        if (taskEntry.getHeading().trim().equals("")) {
             errorMessage += "The heading field is empty\n";
         }
-        if (entry.getTitle().trim().equals("")) {
+        if (taskEntry.getTitle().trim().equals("")) {
             errorMessage += "The title field is empty\n";
         }
         if (!errorMessage.equals("")) {
             return errorMessage;
         } else {
-            String date = entry.getDate().substring(entry.getDate().lastIndexOf("\n") + 1);
-            String time = entry.getTime().substring(entry.getTime().lastIndexOf("\n") + 1);
+            String date = taskEntry.getDate().substring(taskEntry.getDate().lastIndexOf("\n") + 1);
+            String time = taskEntry.getTime().substring(taskEntry.getTime().lastIndexOf("\n") + 1);
             Pattern hasAnyNumbers = Pattern.compile("\\d", Pattern.CASE_INSENSITIVE);
             Matcher matchHasAnyNumbersDate = hasAnyNumbers.matcher(date);
             Matcher matchHasAnyNumbersTime = hasAnyNumbers.matcher(time);

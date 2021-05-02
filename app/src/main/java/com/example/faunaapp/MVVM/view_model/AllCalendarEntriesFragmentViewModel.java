@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
 import com.example.faunaapp.EventBusObjects.EntriesEvent;
@@ -20,8 +20,8 @@ import java.util.List;
 
 public class AllCalendarEntriesFragmentViewModel extends ViewModel {
     private IAllCalendarEntriesModel allCalendarEntriesModell;
-    private MutableLiveData<List<Entry>> entries;
-    private MutableLiveData<Entry> newEntry;
+    private MutableLiveData<List<TaskEntry>> entries;
+    private MutableLiveData<TaskEntry> newEntry;
     private ClientApollo clientApollo;
 
     public AllCalendarEntriesFragmentViewModel() {
@@ -42,12 +42,12 @@ public class AllCalendarEntriesFragmentViewModel extends ViewModel {
     @Subscribe
     public void onNewEntryEvent(EntryEvent entryEvent)
     {
-        newEntry.setValue(entryEvent.getEntry());
+        newEntry.setValue(entryEvent.getTaskEntry());
     }
 
 
 
-    public LiveData<List<Entry>> getEntries() {
+    public LiveData<List<TaskEntry>> getEntries() {
         return entries;
     }
 
@@ -55,7 +55,7 @@ public class AllCalendarEntriesFragmentViewModel extends ViewModel {
             allCalendarEntriesModell.getAllEntries(token);
     }
 
-    public LiveData<Entry> getNewEntry(){
+    public LiveData<TaskEntry> getNewEntry(){
         return newEntry;
     }
 }

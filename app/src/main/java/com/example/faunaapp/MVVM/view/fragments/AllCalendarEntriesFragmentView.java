@@ -14,7 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.MVVM.RecyclerView.Adapters.EntriesAdapter;
 import com.example.faunaapp.R;
 import com.example.faunaapp.MVVM.view.activities.MainActivity;
@@ -30,7 +30,7 @@ public class AllCalendarEntriesFragmentView extends Fragment {
     private AllCalendarEntriesFragmentViewModel allCalendarEntriesFragmentViewModel;
     private FloatingActionButton addButton;
     private RecyclerView futureAppointemtsRecyclerView, pastAppointmentsRecyclerView;
-    private static ArrayList<Entry> futureAppointments,pastAppointments ;
+    private static ArrayList<TaskEntry> futureAppointments,pastAppointments ;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class AllCalendarEntriesFragmentView extends Fragment {
 
     }
 
-    private void setUpRecyclerView(RecyclerView recyclerView, List<Entry> entries) {
+    private void setUpRecyclerView(RecyclerView recyclerView, List<TaskEntry> entries) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.hasFixedSize();
 
@@ -89,7 +89,7 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         setUpRecyclerView(pastAppointmentsRecyclerView, pastAppointments);
     }
 
-    private void configureAppointments(List<Entry> list) {
+    private void configureAppointments(List<TaskEntry> list) {
 
         if(futureAppointments == null && pastAppointments == null) {
             futureAppointments = new ArrayList<>();
@@ -106,18 +106,18 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         }
     }
 
-    private boolean hasToGoToThePastAppointment(Entry entry) {
+    private boolean hasToGoToThePastAppointment(TaskEntry taskEntry) {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
         int currentMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
         int currentDay = Calendar.getInstance().get(Calendar.DATE);
         int currentHour = Calendar.getInstance().get(Calendar.HOUR);
         int currentMinute = Calendar.getInstance().get(Calendar.MINUTE);
-        String [] date = entry.getDate().split("/");
+        String [] date = taskEntry.getDate().split("/");
         int year  = Integer.parseInt(date[2]);
         int month = Integer.parseInt(date[1]);
         int day = Integer.parseInt(date[0]);
         String hours, minutes;
-        String [] times = entry.getTime().split(":");
+        String [] times = taskEntry.getTime().split(":");
         if(times[0].trim().length() == 1)
         {
             hours = "0"+times[0].trim();

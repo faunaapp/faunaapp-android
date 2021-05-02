@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.Navigation;
 
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.Helpers.Helper;
 import com.example.faunaapp.R;
 import com.example.faunaapp.MVVM.view.activities.MainActivity;
@@ -35,7 +35,7 @@ public class AddEntryFragmentView extends Fragment {
     private TextInputLayout headingTextInput, titleTextInput, noteTextInput;
     private AddEntryFragmentViewModel addEntryFragmentViewModel;
     private TimpePickerFragment timePickerFragment;
-    private Entry entryToSubmit;
+    private TaskEntry taskEntryToSubmit;
     private View allCalendarEntriesView;
 
     @Override
@@ -64,8 +64,8 @@ public class AddEntryFragmentView extends Fragment {
         saveButton.setOnClickListener(view -> {
             SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
             String token = prefs.getString("token", "No token provided");
-            entryToSubmit = new Entry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), dateButton.getText().toString(), timeButton.getText().toString());
-            addEntryFragmentViewModel.submitTheEntry(entryToSubmit, token);
+            taskEntryToSubmit = new TaskEntry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), dateButton.getText().toString(), timeButton.getText().toString());
+            addEntryFragmentViewModel.submitTheEntry(taskEntryToSubmit, token);
         });
 
         return addEntryView;

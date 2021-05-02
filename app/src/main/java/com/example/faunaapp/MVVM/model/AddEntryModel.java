@@ -7,7 +7,7 @@ import com.apollographql.apollo.ApolloCall;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.apollographql.apollo.request.RequestHeaders;
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.EventBusObjects.EntryEvent;
 import com.example.faunaapp.Helpers.Helper;
@@ -32,8 +32,8 @@ public class AddEntryModel implements IAddEntryModel {
 
 
     @Override
-    public void submit(Entry entry, String token) {
-      createTaskAsync.execute(token, getISO8601Format(entry.getDate(), entry.getTime()), entry.getHeading(),entry.getTitle(),Category.MEDICINE.toString());
+    public void submit(TaskEntry taskEntry, String token) {
+      createTaskAsync.execute(token, getISO8601Format(taskEntry.getDate(), taskEntry.getTime()), taskEntry.getHeading(), taskEntry.getTitle(),Category.MEDICINE.toString());
     }
 
     private String getISO8601Format(String date, String time) {
@@ -66,8 +66,8 @@ public class AddEntryModel implements IAddEntryModel {
         return dateTimeBuilder.toString();
     }
 
-    private static class CreateTaskAsync extends AsyncTask<String, Void, Entry> {
-        private Entry newEntry;
+    private static class CreateTaskAsync extends AsyncTask<String, Void, TaskEntry> {
+        private TaskEntry newTaskEntry;
         public enum EntryIterator {
             Token(0),
             DateTime(1),
@@ -87,7 +87,7 @@ public class AddEntryModel implements IAddEntryModel {
         }
 
         @Override
-        protected synchronized Entry doInBackground(String... strings) {
+        protected synchronized TaskEntry doInBackground(String... strings) {
             Log.i("Tag", strings[EntryIterator.Token.getValue()] + " : " + strings[EntryIterator.DateTime.getValue()] + " : " + strings[EntryIterator.Content.getValue()] + " : " + strings[EntryIterator.Title.getValue()]);
             apolloClient.mutate(new CreateTaskMutation(strings[EntryIterator.DateTime.getValue()], strings[EntryIterator.Content.getValue()], strings[EntryIterator.Title.getValue()], Category.APPOINTMENT))
                     .toBuilder().requestHeaders(RequestHeaders.builder().addHeader("authorization", strings[0]).build()).build()
@@ -97,7 +97,7 @@ public class AddEntryModel implements IAddEntryModel {
                 public void onResponse(@NotNull Response<CreateTaskMutation.Data> response) {
                     String date = Helper.getDateAndTimeFromISO8601(strings[EntryIterator.DateTime.getValue()]).first;
                     String time = Helper.getDateAndTimeFromISO8601(strings[EntryIterator.DateTime.getValue()]).second;
-                      newEntry = new Entry(strings[EntryIterator.Content.getValue()], strings[EntryIterator.Title.getValue()], "Something important", date,time);
+                      newTaskEntry = new TaskEntry(strings[EntryIterator.Content.getValue()], strings[EntryIterator.Title.getValue()], "Something important", date,time);
                 }
 
                 @Override
@@ -106,18 +106,18 @@ public class AddEntryModel implements IAddEntryModel {
                 }
             });
 
-            while (newEntry == null)
+            while (newTaskEntry == null)
             {
 
             }
-            return newEntry;
+            return newTaskEntry;
 
         }
         @Override
-        protected void onPostExecute(Entry entry) {
-            super.onPostExecute(entry);
+        protected void onPostExecute(TaskEntry taskEntry) {
+            super.onPostExecute(taskEntry);
             EntryEvent entryEvent = new EntryEvent();
-            entryEvent.setEntry(entry);
+            entryEvent.setTaskEntry(taskEntry);
             EventBus.getDefault().post(entryEvent);
         }
 }

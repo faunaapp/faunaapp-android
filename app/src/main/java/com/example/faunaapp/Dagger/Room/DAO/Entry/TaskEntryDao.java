@@ -5,16 +5,16 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 
 import java.util.List;
 
 @Dao
-public interface EntryDao {
+public interface TaskEntryDao {
     @Insert
-    void insert(Entry entry);
+    void insert(TaskEntry taskEntry);
 
-    @Query("SELECT * FROM entry_table")
-    LiveData<List<Entry>> getAllEntries();
+    @Query("SELECT * FROM TaskEntry")
+    LiveData<List<TaskEntry>> getAllEntries();
 
 }

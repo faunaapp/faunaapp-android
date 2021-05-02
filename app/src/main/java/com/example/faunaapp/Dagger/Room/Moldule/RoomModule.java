@@ -3,10 +3,11 @@ package com.example.faunaapp.Dagger.Room.Moldule;
 import android.app.Application;
 
 import androidx.room.Room;
-import com.example.faunaapp.Dagger.Room.DAO.Entry.EntryDao;
-import com.example.faunaapp.Dagger.Room.DAO.Entry.EntryDataSource;
+
+import com.example.faunaapp.Dagger.Room.DAO.Entry.ITaskEntryRepository;
+import com.example.faunaapp.Dagger.Room.DAO.Entry.TaskEntryDao;
+import com.example.faunaapp.Dagger.Room.DAO.Entry.TaskEntryDataSource;
 import com.example.faunaapp.Dagger.Room.Database.FaunaappDatabase;
-import com.example.faunaapp.Dagger.Room.DAO.Entry.IEntryRepository;
 
 import javax.inject.Singleton;
 
@@ -29,15 +30,15 @@ public class RoomModule {
 
     @Singleton
     @Provides
-    EntryDao providesEntryDao(FaunaappDatabase faunaappDatabase)
+    TaskEntryDao providesEntryDao(FaunaappDatabase faunaappDatabase)
     {
         return faunaappDatabase.entryDao();
     }
 
     @Singleton
     @Provides
-    IEntryRepository entryRepository(EntryDao entryDao)
+    ITaskEntryRepository entryRepository(TaskEntryDao taskEntryDao)
     {
-        return new EntryDataSource(entryDao);
+        return new TaskEntryDataSource(taskEntryDao);
     }
 }

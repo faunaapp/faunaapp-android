@@ -1,22 +1,22 @@
 package com.example.faunaapp.EventBusObjects;
 
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EntriesEvent {
-    private List<Entry> entries;
+    private List<TaskEntry> entries;
 
     public EntriesEvent() {
         entries = new ArrayList<>();
     }
 
-    public void setEntries(List<Entry> entries) {
+    public void setEntries(List<TaskEntry> entries) {
         this.entries = entries;
     }
 
-    public List<Entry> getEntries() {
+    public List<TaskEntry> getEntries() {
         return entries;
     }
 }

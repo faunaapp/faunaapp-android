@@ -8,15 +8,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.R;
 
 import java.util.List;
 
 public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHolder> {
 
-    private List<Entry> entries;
-    public EntriesAdapter(List<Entry> entries)
+    private List<TaskEntry> entries;
+    public EntriesAdapter(List<TaskEntry> entries)
     {
         this.entries = entries;
     }
@@ -44,7 +44,7 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
         return entries.size();
     }
 
-    public List<Entry> getEntries() {
+    public List<TaskEntry> getEntries() {
         return entries;
     }
 

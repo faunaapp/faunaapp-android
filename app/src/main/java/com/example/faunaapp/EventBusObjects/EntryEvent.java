@@ -1,20 +1,20 @@
 package com.example.faunaapp.EventBusObjects;
 
-import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.DTO.TaskEntry;
 
 public class EntryEvent {
-    private Entry entry;
+    private TaskEntry taskEntry;
 
     public EntryEvent() {
-        entry = new Entry();
+        taskEntry = new TaskEntry();
     }
 
-    public Entry getEntry() {
-        return entry;
+    public TaskEntry getTaskEntry() {
+        return taskEntry;
     }
 
-    public void setEntry(Entry entry) {
-        this.entry = entry;
+    public void setTaskEntry(TaskEntry taskEntry) {
+        this.taskEntry = taskEntry;
     }
 
 }
