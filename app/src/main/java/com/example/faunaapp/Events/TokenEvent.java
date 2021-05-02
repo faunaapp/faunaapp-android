@@ -1,6 +1,5 @@
 package com.example.faunaapp.Events;
 
-import com.example.faunaapp.DTO.Entry;
 
 public class TokenEvent {
 

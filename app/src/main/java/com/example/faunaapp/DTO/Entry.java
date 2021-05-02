@@ -34,6 +34,7 @@ public class Entry {
         this(heading, title, description, date, time);
         this.token = token;
     }
+
     @Ignore
     public Entry(String heading, String title, String description, String date, String time)
     {

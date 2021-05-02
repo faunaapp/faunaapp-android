@@ -1,4 +1,4 @@
-package com.example.faunaapp.Repository.DAO;
+package com.example.faunaapp.repository.DAO;
 
 import androidx.lifecycle.LiveData;
 
