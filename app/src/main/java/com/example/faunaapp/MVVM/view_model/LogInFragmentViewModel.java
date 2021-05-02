@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
+import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
 import com.example.faunaapp.EventBusObjects.TokenEvent;
-import com.example.faunaapp.client.DaggerClientApolloComponent;
 import com.example.faunaapp.MVVM.model.ILogInModel;
 import com.example.faunaapp.MVVM.model.LogInModel;
 
@@ -52,28 +52,13 @@ public class LogInFragmentViewModel extends ViewModel {
         token.setValue(tokenEvent.getToken());
     }
 
-
-
     public void logIn(String email, String password) {
-        if (checkIfEmailAndPasswordExists(email, password)) {
-            logInModel.logIn(email, password);
-        }
+             errorConstructor = "";
+            boolean isLoggedIn = logInModel.logIn(email, password);
+            if(!isLoggedIn)
+            {
+                errorConstructor += "Email or password are not correct";
+                errorMessage.postValue(errorConstructor);
+            }
     }
-
-    private boolean checkIfEmailAndPasswordExists(String email, String password) {
-        errorConstructor = "";
-        if (email.equals("")) {
-            errorConstructor += "Please, provide your email\n";
-        }
-        if (password.equals("")) {
-            errorConstructor += "Please, provide your password";
-        }
-        if (errorConstructor.equals("")) {
-            return true;
-        }
-        errorMessage.postValue(errorConstructor);
-        return false;
-    }
-
-
 }

@@ -8,7 +8,8 @@ import com.example.faunaapp.DTO.Entry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
 
-import com.example.faunaapp.client.DaggerClientApolloComponent;
+
+import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
 import com.example.faunaapp.MVVM.model.AddEntryModel;
 import com.example.faunaapp.MVVM.model.IAddEntryModel;
 

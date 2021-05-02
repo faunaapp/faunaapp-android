@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.faunaapp.DTO.Entry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
+import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
 import com.example.faunaapp.EventBusObjects.EntriesEvent;
 import com.example.faunaapp.EventBusObjects.EntryEvent;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
-import com.example.faunaapp.client.DaggerClientApolloComponent;
+
 import com.example.faunaapp.MVVM.model.AllCalendarEntriesModel;
 import com.example.faunaapp.MVVM.model.IAllCalendarEntriesModel;
 

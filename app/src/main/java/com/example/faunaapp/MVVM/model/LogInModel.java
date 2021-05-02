@@ -36,9 +36,13 @@ public class LogInModel implements ILogInModel {
     }
 
     @Override
-    public void logIn(String email, String password) {
+    public boolean logIn(String email, String password) {
+        if (email.equals("") || password.equals(""))
+        {
+            return false;
+        }
         logInAsyncTask.execute(email.trim(), password.trim());
-
+        return true;
     }
 
 
