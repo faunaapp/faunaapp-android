@@ -1,8 +1,9 @@
-package com.example.faunaapp.Dagger.Room.DAO;
+package com.example.faunaapp.Dagger.Room.Database;
 
 
 import androidx.room.RoomDatabase;
 import com.example.faunaapp.DTO.Entry;
+import com.example.faunaapp.Dagger.Room.DAO.Entry.EntryDao;
 
 
 @androidx.room.Database(entities = {Entry.class}, version = FaunaappDatabase.VERSION, exportSchema = false)

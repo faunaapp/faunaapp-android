@@ -3,10 +3,10 @@ package com.example.faunaapp.Dagger.Room.Moldule;
 import android.app.Application;
 
 import androidx.room.Room;
-import com.example.faunaapp.Dagger.Room.DAO.EntryDao;
-import com.example.faunaapp.Dagger.Room.DAO.EntryDataSource;
-import com.example.faunaapp.Dagger.Room.DAO.FaunaappDatabase;
-import com.example.faunaapp.Dagger.Room.DAO.IEntryRepository;
+import com.example.faunaapp.Dagger.Room.DAO.Entry.EntryDao;
+import com.example.faunaapp.Dagger.Room.DAO.Entry.EntryDataSource;
+import com.example.faunaapp.Dagger.Room.Database.FaunaappDatabase;
+import com.example.faunaapp.Dagger.Room.DAO.Entry.IEntryRepository;
 
 import javax.inject.Singleton;
 

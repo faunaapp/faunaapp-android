@@ -1,11 +1,11 @@
-package com.example.faunaapp.Dagger.Room;
+package com.example.faunaapp.Dagger.Room.Component;
 
 import android.app.Application;
 
 
-import com.example.faunaapp.Dagger.Room.DAO.EntryDao;
-import com.example.faunaapp.Dagger.Room.DAO.FaunaappDatabase;
-import com.example.faunaapp.Dagger.Room.DAO.IEntryRepository;
+import com.example.faunaapp.Dagger.Room.DAO.Entry.EntryDao;
+import com.example.faunaapp.Dagger.Room.Database.FaunaappDatabase;
+import com.example.faunaapp.Dagger.Room.DAO.Entry.IEntryRepository;
 import com.example.faunaapp.Dagger.Room.Moldule.AppModule;
 import com.example.faunaapp.Dagger.Room.Moldule.RoomModule;
 import com.example.faunaapp.MVVM.view.activities.MainActivity;

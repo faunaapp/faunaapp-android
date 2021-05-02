@@ -1,4 +1,4 @@
-package com.example.faunaapp.Dagger.Room.DAO;
+package com.example.faunaapp.Dagger.Room.DAO.Entry;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
