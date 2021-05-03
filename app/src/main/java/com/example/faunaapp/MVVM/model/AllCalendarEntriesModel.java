@@ -8,7 +8,7 @@ import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.apollographql.apollo.request.RequestHeaders;
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.data.DTO.TaskEntry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.EventBusObjects.EntriesEvent;
 import com.example.faunaapp.Helpers.Helper;

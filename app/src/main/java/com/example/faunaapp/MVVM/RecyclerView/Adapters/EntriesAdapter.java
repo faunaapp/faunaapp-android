@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.data.DTO.TaskEntry;
 import com.example.faunaapp.R;
 
 import java.util.List;

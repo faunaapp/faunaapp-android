@@ -1,6 +1,7 @@
 package com.example.faunaapp.MVVM.view.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,9 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.MainApplication;
+import com.example.faunaapp.data.DTO.TaskEntry;
 import com.example.faunaapp.Helpers.Helper;
 import com.example.faunaapp.R;
 import com.example.faunaapp.MVVM.view.activities.MainActivity;
@@ -27,26 +30,35 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import javax.inject.Inject;
+
 public class AddEntryFragmentView extends Fragment {
     private View addEntryView;
     private Button dateButton, timeButton, saveButton;
     private MaterialDatePicker<Long> datePicker;
     private FragmentManager fragmentManager;
     private TextInputLayout headingTextInput, titleTextInput, noteTextInput;
-    private AddEntryFragmentViewModel addEntryFragmentViewModel;
     private TimpePickerFragment timePickerFragment;
     private TaskEntry taskEntryToSubmit;
+
+    @Inject
+    AddEntryFragmentViewModel addEntryFragmentViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ((MainApplication) getActivity().getApplicationContext()).getAppComponent().inject(this);
+    }
+
     @SuppressLint("SetTextI18n")
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
         addEntryView = inflater.inflate(R.layout.add_task_entry_fragment, container, false);
 
         initializeFragmentValues();
@@ -114,7 +126,7 @@ public class AddEntryFragmentView extends Fragment {
         noteTextInput = addEntryView.findViewById(R.id.fragment_add_task_entry_textInput_note_input_id);
         saveButton = addEntryView.findViewById(R.id.fragment_add_task_entry_save_button_id);
         datePicker = getDatePickers();
-        addEntryFragmentViewModel = new AddEntryFragmentViewModel();
+//        addEntryFragmentViewModel = new ViewModelProvider(this).get(AddEntryFragmentViewModel.class);
         timePickerFragment = new TimpePickerFragment();
         setUpObserver();
     }

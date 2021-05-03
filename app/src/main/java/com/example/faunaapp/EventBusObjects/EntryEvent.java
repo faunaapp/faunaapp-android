@@ -1,6 +1,6 @@
 package com.example.faunaapp.EventBusObjects;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.data.DTO.TaskEntry;
 
 public class EntryEvent {
     private TaskEntry taskEntry;

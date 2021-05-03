@@ -1,8 +1,8 @@
-package com.example.faunaapp.Dagger.Room.DAO.Entry;
+package com.example.faunaapp.data.Entry;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.data.DTO.TaskEntry;
 
 import java.util.List;
 

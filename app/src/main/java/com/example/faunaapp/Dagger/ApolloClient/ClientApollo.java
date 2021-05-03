@@ -20,7 +20,7 @@ public class ClientApollo {
     public ClientApollo() {
 
     }
-    public com.apollographql.apollo.ApolloClient getClient(){
-       return com.apollographql.apollo.ApolloClient.builder().serverUrl(path).build();
+    public ApolloClient getClient(){
+       return ApolloClient.builder().serverUrl(path).build();
     }
 }

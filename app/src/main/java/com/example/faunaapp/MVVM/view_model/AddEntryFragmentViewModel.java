@@ -1,22 +1,29 @@
 package com.example.faunaapp.MVVM.view_model;
 
 
+import android.annotation.SuppressLint;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
+import com.example.faunaapp.data.DTO.TaskEntry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
 
 
-import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
+import com.example.faunaapp.data.Entry.ITaskEntryRepository;
 import com.example.faunaapp.MVVM.model.AddEntryModel;
 import com.example.faunaapp.MVVM.model.IAddEntryModel;
+import com.example.faunaapp.MVVM.view.activities.MainActivity;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.inject.Inject;
+
 
 public class AddEntryFragmentViewModel extends ViewModel {
     private String constantDateText, constantTimeText;
@@ -25,9 +32,13 @@ public class AddEntryFragmentViewModel extends ViewModel {
     private ClientApollo clientApollo;
     private IAddEntryModel entryModel;
 
+    private ITaskEntryRepository entryRepository;
+
+    @Inject
+    public AddEntryFragmentViewModel(ITaskEntryRepository entryRepository) {
+        this.entryRepository = entryRepository;
 
 
-    public AddEntryFragmentViewModel() {
         constantDateText = "Vælg dato";
         constantTimeText = "Tidspunkt";
         date = new MutableLiveData<>();
@@ -49,6 +60,7 @@ public class AddEntryFragmentViewModel extends ViewModel {
 
     public void submitTheEntry(TaskEntry taskEntry, String token) {
         String errorMessage = getErrorIfExists(taskEntry);
+        entryRepository.insertTaskEntry(taskEntry);
         if(!errorMessage.equals(""))
         {
             error.postValue(errorMessage);

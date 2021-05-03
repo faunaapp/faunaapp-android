@@ -1,6 +1,7 @@
 package com.example.faunaapp.Dagger.Room.Moldule;
 
 import android.app.Application;
+import android.content.Context;
 
 import javax.inject.Singleton;
 
@@ -9,15 +10,15 @@ import dagger.Provides;
 
 @Module
 public class AppModule {
-    Application application;
+    Context context;
 
-    public AppModule(Application application) {
-        this.application = application;
+    public AppModule(Context context) {
+        this.context = context;
     }
 
     @Provides
     @Singleton
-    Application providesApplication(){
-        return application;
+    Context providesContext(){
+        return context;
     }
 }
