@@ -1,4 +1,4 @@
-package com.example.faunaapp.MVVM.Model;
+package com.example.faunaapp.MVVM.Model.TaskEntry;
 
 import android.app.Application;
 
@@ -42,7 +42,6 @@ public class TaskEntryModel implements ITaskEntryModel {
 
     @Override
     public void insertAllTaskEntry(List<TaskEntry> taskEntries) {
-
     }
 
     public LiveData<List<TaskEntry>> getAllEntries(){

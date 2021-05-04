@@ -8,7 +8,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.faunaapp.DTO.TaskEntry;
-import com.example.faunaapp.MVVM.Model.TaskEntryDao;
+import com.example.faunaapp.MVVM.Model.TaskEntry.TaskEntryDao;
 
 
 @Database(entities = {TaskEntry.class}, version = FaunaappDatabase.VERSION, exportSchema = false)

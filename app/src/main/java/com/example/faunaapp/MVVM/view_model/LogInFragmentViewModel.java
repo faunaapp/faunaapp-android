@@ -1,41 +1,39 @@
 package com.example.faunaapp.MVVM.view_model;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
 import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
 import com.example.faunaapp.EventBusObjects.TokenEvent;
-import com.example.faunaapp.MVVM.Repository.ILogInModel;
-import com.example.faunaapp.MVVM.Repository.LogInModel;
+import com.example.faunaapp.MVVM.Repository.LogIn.ILogInRepository;
+import com.example.faunaapp.MVVM.Repository.LogIn.LogInRepository;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-public class LogInFragmentViewModel extends ViewModel {
+public class LogInFragmentViewModel extends AndroidViewModel {
     private MutableLiveData<String> errorMessage;
     private String errorConstructor;
-    private ILogInModel logInModel;
-    private ExecutorService executorService;
+    private ILogInRepository logInRepository;
+
     private MutableLiveData<String> token;
     private ClientApollo clientApollo;
 
 
-    public LogInFragmentViewModel() {
-
+    public LogInFragmentViewModel(Application application) {
+        super(application);
         EventBus.getDefault().register(this);
         errorMessage = new MutableLiveData<>();
         token = new MediatorLiveData<>();
         ClientApolloComponent component = DaggerClientApolloComponent.create();
         clientApollo = component.getClient();
-        executorService = Executors.newFixedThreadPool(2);
-        logInModel = new LogInModel(clientApollo);
+        logInRepository = new LogInRepository(application);
     }
 
     public LiveData<String> getErrorMessage() {
@@ -54,7 +52,7 @@ public class LogInFragmentViewModel extends ViewModel {
 
     public void logIn(String email, String password) {
              errorConstructor = "";
-            boolean isLoggedIn = logInModel.logIn(email, password);
+            boolean isLoggedIn = logInRepository.logIn(email, password);
             if(!isLoggedIn)
             {
                 errorConstructor += "Email or password are not correct";

@@ -1,4 +1,4 @@
-package com.example.faunaapp.MVVM.Repository;
+package com.example.faunaapp.MVVM.Repository.AddTaskEntry;
 
 import android.app.Application;
 
@@ -7,10 +7,10 @@ import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
 import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
-import com.example.faunaapp.MVVM.Model.ITaskEntryModel;
-import com.example.faunaapp.MVVM.Model.TaskEntryModel;
-import com.example.faunaapp.MVVM.RemoteDataSource.AddTaskEntryRemoteDataSource;
-import com.example.faunaapp.MVVM.RemoteDataSource.IAddTaskEntryRemoteDataSource;
+import com.example.faunaapp.MVVM.Model.TaskEntry.ITaskEntryModel;
+import com.example.faunaapp.MVVM.Model.TaskEntry.TaskEntryModel;
+import com.example.faunaapp.MVVM.RemoteDataSource.AddTaskEntry.AddTaskEntryRemoteDataSource;
+import com.example.faunaapp.MVVM.RemoteDataSource.AddTaskEntry.IAddTaskEntryRemoteDataSource;
 
 public class AddTaskEntryRepository implements IAddTaskEntryRepository {
 

@@ -7,11 +7,10 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.faunaapp.DTO.TaskEntry;
-import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 
 
-import com.example.faunaapp.MVVM.Repository.AddTaskEntryRepository;
-import com.example.faunaapp.MVVM.Repository.IAddTaskEntryRepository;
+import com.example.faunaapp.MVVM.Repository.AddTaskEntry.AddTaskEntryRepository;
+import com.example.faunaapp.MVVM.Repository.AddTaskEntry.IAddTaskEntryRepository;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -23,7 +22,6 @@ public class AddEntryFragmentViewModel extends AndroidViewModel {
     private ExecutorService executorService;
     private MutableLiveData<String> date, time, error;
     private IAddTaskEntryRepository entryRepository;
-
 
 
     public AddEntryFragmentViewModel(Application application) {
@@ -50,15 +48,11 @@ public class AddEntryFragmentViewModel extends AndroidViewModel {
     public void submitTheEntry(TaskEntry taskEntry, String token) {
         String errorMessage = getErrorIfExists(taskEntry);
         entryRepository.submit(taskEntry, token);
-        if(!errorMessage.equals(""))
-        {
+        if (!errorMessage.equals("")) {
             error.postValue(errorMessage);
             return;
         }
         error.postValue("");
-        executorService.execute(() -> {
-            entryRepository.submit(taskEntry, token);
-        });
     }
 
     private String getErrorIfExists(TaskEntry taskEntry) {

@@ -1,31 +1,26 @@
-package com.example.faunaapp.MVVM.Repository;
+package com.example.faunaapp.MVVM.RemoteDataSource.LogIn;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.apollographql.apollo.ApolloCall;
+import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
-import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.EventBusObjects.TokenEvent;
 import com.faunaapp.graphql.LogInMutation;
-
 
 import org.greenrobot.eventbus.EventBus;
 import org.jetbrains.annotations.NotNull;
 
-
-public class LogInModel implements ILogInModel {
+public class LogInRemoteDataSource implements ILogInRemoteDataSource {
+    private static ApolloClient apolloClient = null;
     private LogInAsyncTask logInAsyncTask;
-    private static com.apollographql.apollo.ApolloClient apolloClient;
 
-
-
-    public LogInModel(ClientApollo clientApollo) {
-        LogInModel.apolloClient = clientApollo.getClient();
+    public LogInRemoteDataSource(ApolloClient otherApolloClient) {
+        apolloClient = otherApolloClient;
         logInAsyncTask = new LogInAsyncTask();
     }
-
     @Override
     public boolean logIn(String email, String password) {
         if (email.equals("") || password.equals("")) {
@@ -57,7 +52,7 @@ public class LogInModel implements ILogInModel {
         @Override
         protected synchronized Void doInBackground(String... strings) {
 
-            apolloClient.mutate(new LogInMutation(strings[LogInIterator.Email.getValue()], strings[LogInIterator.Password.getValue()])).enqueue(new ApolloCall.Callback<LogInMutation.Data>() {
+            apolloClient.mutate(new LogInMutation(strings[LogInAsyncTask.LogInIterator.Email.getValue()], strings[LogInAsyncTask.LogInIterator.Password.getValue()])).enqueue(new ApolloCall.Callback<LogInMutation.Data>() {
                 @Override
                 public void onResponse(@NotNull Response<LogInMutation.Data> response) {
                     Log.i("Tag", strings[0] + " : " + strings[1]);

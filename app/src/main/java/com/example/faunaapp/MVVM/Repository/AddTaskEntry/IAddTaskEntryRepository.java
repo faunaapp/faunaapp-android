@@ -1,4 +1,4 @@
-package com.example.faunaapp.MVVM.Repository;
+package com.example.faunaapp.MVVM.Repository.AddTaskEntry;
 
 import com.example.faunaapp.DTO.TaskEntry;
 

@@ -1,5 +1,8 @@
 package com.example.faunaapp.MVVM.view_model;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -13,22 +16,25 @@ import com.example.faunaapp.EventBusObjects.EntryEvent;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
 
 import com.example.faunaapp.MVVM.Repository.AllCalendarEntriesModel;
+import com.example.faunaapp.MVVM.Repository.AllCalendarsEntry.AllCalendarEntriesRepository;
+import com.example.faunaapp.MVVM.Repository.AllCalendarsEntry.IAllCalendarEntriesRepository;
 import com.example.faunaapp.MVVM.Repository.IAllCalendarEntriesModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+
+import java.nio.channels.OverlappingFileLockException;
 import java.util.List;
 
-public class AllCalendarEntriesFragmentViewModel extends ViewModel {
-    private IAllCalendarEntriesModel allCalendarEntriesModell;
+public class AllCalendarEntriesFragmentViewModel extends AndroidViewModel {
+    private IAllCalendarEntriesRepository allCalendarEntriesRepository;
     private MutableLiveData<List<TaskEntry>> entries;
     private MutableLiveData<TaskEntry> newEntry;
-    private ClientApollo clientApollo;
 
-    public AllCalendarEntriesFragmentViewModel() {
-        ClientApolloComponent component = DaggerClientApolloComponent.create();
-        clientApollo = component.getClient();
-       allCalendarEntriesModell = new AllCalendarEntriesModel(clientApollo);
+
+    public AllCalendarEntriesFragmentViewModel(Application application) {
+        super(application);
+        allCalendarEntriesRepository = new AllCalendarEntriesRepository(application);
         entries = new MutableLiveData<>();
         newEntry = new MutableLiveData<>();
         EventBus.getDefault().register(this);
@@ -53,7 +59,7 @@ public class AllCalendarEntriesFragmentViewModel extends ViewModel {
     }
 
     public void getAllTasks(String token){
-            allCalendarEntriesModell.getAllEntries(token);
+            allCalendarEntriesRepository.getAllEntries(token);
     }
 
     public LiveData<TaskEntry> getNewEntry(){

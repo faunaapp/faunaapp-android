@@ -1,4 +1,4 @@
-package com.example.faunaapp.MVVM.Model;
+package com.example.faunaapp.MVVM.Model.TaskEntry;
 
 import androidx.lifecycle.LiveData;
 
