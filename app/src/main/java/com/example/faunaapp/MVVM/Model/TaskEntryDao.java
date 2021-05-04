@@ -1,4 +1,4 @@
-package com.example.faunaapp.data.Entry;
+package com.example.faunaapp.MVVM.Model;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.faunaapp.data.DTO.TaskEntry;
+import com.example.faunaapp.DTO.TaskEntry;
 
 import java.util.List;
 
@@ -15,8 +15,8 @@ public interface TaskEntryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(TaskEntry taskEntry);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<TaskEntry> tasksEntry);
+//    @Insert(onConflict = OnConflictStrategy.REPLACE)
+//    void insertAll(List<TaskEntry> tasksEntry);
 
     @Query("SELECT * FROM entry_table")
     LiveData<List<TaskEntry>> getAllEntries();

@@ -9,8 +9,8 @@ import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
 import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
 import com.example.faunaapp.EventBusObjects.TokenEvent;
-import com.example.faunaapp.MVVM.model.ILogInModel;
-import com.example.faunaapp.MVVM.model.LogInModel;
+import com.example.faunaapp.MVVM.Repository.ILogInModel;
+import com.example.faunaapp.MVVM.Repository.LogInModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

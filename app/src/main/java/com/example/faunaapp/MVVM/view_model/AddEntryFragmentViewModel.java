@@ -1,43 +1,33 @@
 package com.example.faunaapp.MVVM.view_model;
 
 
-import android.annotation.SuppressLint;
+import android.app.Application;
 
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
-import com.example.faunaapp.data.DTO.TaskEntry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
-import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
 
 
-import com.example.faunaapp.data.Entry.ITaskEntryRepository;
-import com.example.faunaapp.MVVM.model.AddEntryModel;
-import com.example.faunaapp.MVVM.model.IAddEntryModel;
-import com.example.faunaapp.MVVM.view.activities.MainActivity;
+import com.example.faunaapp.MVVM.Repository.AddTaskEntryRepository;
+import com.example.faunaapp.MVVM.Repository.IAddTaskEntryRepository;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.inject.Inject;
-
-
-public class AddEntryFragmentViewModel extends ViewModel {
+public class AddEntryFragmentViewModel extends AndroidViewModel {
     private String constantDateText, constantTimeText;
     private ExecutorService executorService;
     private MutableLiveData<String> date, time, error;
-    private ClientApollo clientApollo;
-    private IAddEntryModel entryModel;
+    private IAddTaskEntryRepository entryRepository;
 
-    private ITaskEntryRepository entryRepository;
 
-    @Inject
-    public AddEntryFragmentViewModel(ITaskEntryRepository entryRepository) {
-        this.entryRepository = entryRepository;
 
+    public AddEntryFragmentViewModel(Application application) {
+        super(application);
 
         constantDateText = "Vælg dato";
         constantTimeText = "Tidspunkt";
@@ -45,9 +35,8 @@ public class AddEntryFragmentViewModel extends ViewModel {
         time = new MutableLiveData<>();
         error = new MutableLiveData<>();
         executorService = Executors.newFixedThreadPool(2);
-        ClientApolloComponent component = DaggerClientApolloComponent.create();
-        clientApollo = component.getClient();
-        entryModel = new AddEntryModel(clientApollo);
+
+        entryRepository = new AddTaskEntryRepository(application);
     }
 
     public void chooseDate(String date) {
@@ -60,7 +49,7 @@ public class AddEntryFragmentViewModel extends ViewModel {
 
     public void submitTheEntry(TaskEntry taskEntry, String token) {
         String errorMessage = getErrorIfExists(taskEntry);
-        entryRepository.insertTaskEntry(taskEntry);
+        entryRepository.submit(taskEntry, token);
         if(!errorMessage.equals(""))
         {
             error.postValue(errorMessage);
@@ -68,7 +57,7 @@ public class AddEntryFragmentViewModel extends ViewModel {
         }
         error.postValue("");
         executorService.execute(() -> {
-            entryModel.submit(taskEntry, token);
+            entryRepository.submit(taskEntry, token);
         });
     }
 

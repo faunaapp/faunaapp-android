@@ -14,7 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.faunaapp.data.DTO.TaskEntry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.MVVM.RecyclerView.Adapters.EntriesAdapter;
 import com.example.faunaapp.R;
 import com.example.faunaapp.MVVM.view.activities.MainActivity;
@@ -31,13 +31,11 @@ public class AllCalendarEntriesFragmentView extends Fragment {
     private FloatingActionButton addButton;
     private RecyclerView futureAppointemtsRecyclerView, pastAppointmentsRecyclerView;
     private static ArrayList<TaskEntry> futureAppointments,pastAppointments ;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
-
-
 
     @Nullable
     @Override

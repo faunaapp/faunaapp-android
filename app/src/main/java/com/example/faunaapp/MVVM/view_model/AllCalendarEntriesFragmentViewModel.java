@@ -4,15 +4,16 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.faunaapp.data.DTO.TaskEntry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
+
 import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
 import com.example.faunaapp.EventBusObjects.EntriesEvent;
 import com.example.faunaapp.EventBusObjects.EntryEvent;
 import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
 
-import com.example.faunaapp.MVVM.model.AllCalendarEntriesModel;
-import com.example.faunaapp.MVVM.model.IAllCalendarEntriesModel;
+import com.example.faunaapp.MVVM.Repository.AllCalendarEntriesModel;
+import com.example.faunaapp.MVVM.Repository.IAllCalendarEntriesModel;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

@@ -1,7 +1,7 @@
 package com.example.faunaapp.MVVM.view.fragments;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,8 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.faunaapp.MainApplication;
-import com.example.faunaapp.data.DTO.TaskEntry;
+import com.example.faunaapp.DTO.TaskEntry;
 import com.example.faunaapp.Helpers.Helper;
 import com.example.faunaapp.R;
 import com.example.faunaapp.MVVM.view.activities.MainActivity;
@@ -30,8 +29,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import javax.inject.Inject;
-
 public class AddEntryFragmentView extends Fragment {
     private View addEntryView;
     private Button dateButton, timeButton, saveButton;
@@ -41,19 +38,15 @@ public class AddEntryFragmentView extends Fragment {
     private TimpePickerFragment timePickerFragment;
     private TaskEntry taskEntryToSubmit;
 
-    @Inject
-    AddEntryFragmentViewModel addEntryFragmentViewModel;
+
+    private AddEntryFragmentViewModel addEntryFragmentViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        ((MainApplication) getActivity().getApplicationContext()).getAppComponent().inject(this);
-    }
+
 
     @SuppressLint("SetTextI18n")
     @Nullable
@@ -126,7 +119,7 @@ public class AddEntryFragmentView extends Fragment {
         noteTextInput = addEntryView.findViewById(R.id.fragment_add_task_entry_textInput_note_input_id);
         saveButton = addEntryView.findViewById(R.id.fragment_add_task_entry_save_button_id);
         datePicker = getDatePickers();
-//        addEntryFragmentViewModel = new ViewModelProvider(this).get(AddEntryFragmentViewModel.class);
+        addEntryFragmentViewModel = new ViewModelProvider(this).get(AddEntryFragmentViewModel.class);
         timePickerFragment = new TimpePickerFragment();
         setUpObserver();
     }

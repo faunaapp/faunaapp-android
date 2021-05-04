@@ -1,4 +1,4 @@
-package com.example.faunaapp.data.DTO;
+package com.example.faunaapp.DTO;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;

@@ -1,4 +1,4 @@
-package com.example.faunaapp.MVVM.model;
+package com.example.faunaapp.MVVM.Repository;
 
 public interface IAllCalendarEntriesModel {
 
