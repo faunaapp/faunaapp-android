@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/loading"
-        android:name="com.example.faunaapp.MVVM.view.fragments.LoadingFragmentView"
+        android:name="com.example.faunaapp.MVVM.View.Fragments.LoadingFragmentView"
         android:label="log_in_fragment">
         <action
             android:id="@+id/action_loading_to_log_in"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/log_in"
-        android:name="com.example.faunaapp.MVVM.view.fragments.LogInFragmentView"
+        android:name="com.example.faunaapp.MVVM.View.Fragments.LogInFragmentView"
         android:label="log_in_fragment">
         <action
             android:id="@+id/action_log_in_to_allCalendarEntriesFragment"
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/allCalendarEntriesFragment"
-        android:name="com.example.faunaapp.MVVM.view.fragments.AllCalendarEntriesFragmentView"
+        android:name="com.example.faunaapp.MVVM.View.Fragments.AllCalendarEntriesFragmentView"
         android:label="AllCalendarEntriesFragment" >
         <action
             android:id="@+id/action_allCalendarEntriesFragment_to_addEntryFragmentView"
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/addEntryFragmentView"
-        android:name="com.example.faunaapp.MVVM.view.fragments.AddEntryFragmentView"
+        android:name="com.example.faunaapp.MVVM.View.Fragments.AddEntryFragmentView"
         android:label="AddEntryFragmentView" >
         <action
             android:id="@+id/action_addEntryFragmentView_to_allCalendarEntriesFragment"

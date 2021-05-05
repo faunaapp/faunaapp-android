@@ -4,13 +4,14 @@ import android.app.Application;
 
 import com.apollographql.apollo.ApolloClient;
 import com.example.faunaapp.DTO.TaskEntry;
-import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
-import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
-import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
-import com.example.faunaapp.MVVM.Model.TaskEntry.ITaskEntryModel;
-import com.example.faunaapp.MVVM.Model.TaskEntry.TaskEntryModel;
-import com.example.faunaapp.MVVM.RemoteDataSource.AddTaskEntry.AddTaskEntryRemoteDataSource;
-import com.example.faunaapp.MVVM.RemoteDataSource.AddTaskEntry.IAddTaskEntryRemoteDataSource;
+import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApollo;
+import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApolloComponent;
+
+import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.DaggerClientApolloComponent;
+import com.example.faunaapp.MVVM.RoomModel.TaskEntry.ITaskEntryModel;
+import com.example.faunaapp.MVVM.RoomModel.TaskEntry.TaskEntryModel;
+import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.AddTaskEntry.AddTaskEntryRemoteDataSource;
+import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.AddTaskEntry.IAddTaskEntryRemoteDataSource;
 
 public class AddTaskEntryRepository implements IAddTaskEntryRepository {
 

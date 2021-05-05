@@ -3,11 +3,12 @@ package com.example.faunaapp.MVVM.Repository.AllCalendarsEntry;
 import android.app.Application;
 
 import com.apollographql.apollo.ApolloClient;
-import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
-import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
-import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
-import com.example.faunaapp.MVVM.RemoteDataSource.AllCalendarEntries.AllCalendarEntriesDataSource;
-import com.example.faunaapp.MVVM.RemoteDataSource.AllCalendarEntries.IALLCalendarEntriesDataSource;
+import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApollo;
+import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApolloComponent;
+
+import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.DaggerClientApolloComponent;
+import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.AllCalendarEntries.AllCalendarEntriesDataSource;
+import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.AllCalendarEntries.IALLCalendarEntriesDataSource;
 
 public class AllCalendarEntriesRepository implements IAllCalendarEntriesRepository{
     private static ApolloClient apolloClient;

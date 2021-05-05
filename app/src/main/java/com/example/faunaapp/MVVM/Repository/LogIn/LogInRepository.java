@@ -3,11 +3,11 @@ package com.example.faunaapp.MVVM.Repository.LogIn;
 import android.app.Application;
 
 import com.apollographql.apollo.ApolloClient;
-import com.example.faunaapp.Dagger.ApolloClient.ClientApollo;
-import com.example.faunaapp.Dagger.ApolloClient.ClientApolloComponent;
-import com.example.faunaapp.Dagger.ApolloClient.DaggerClientApolloComponent;
-import com.example.faunaapp.MVVM.RemoteDataSource.LogIn.ILogInRemoteDataSource;
-import com.example.faunaapp.MVVM.RemoteDataSource.LogIn.LogInRemoteDataSource;
+import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApollo;
+import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApolloComponent;
+import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.DaggerClientApolloComponent;
+import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.LogIn.ILogInRemoteDataSource;
+import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.LogIn.LogInRemoteDataSource;
 
 
 public class LogInRepository implements ILogInRepository {
