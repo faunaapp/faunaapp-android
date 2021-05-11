@@ -3,8 +3,7 @@ package com.example.faunaapp.MVVM.Repository.AddTaskEntry;
 import android.app.Application;
 
 import com.apollographql.apollo.ApolloClient;
-import com.example.faunaapp.DTO.TaskEntry;
-import com.example.faunaapp.EventBusObjects.TokenEvent;
+import com.example.faunaapp.DTO_and_Room_tables.TaskEntry;
 import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApollo;
 import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApolloComponent;
 
@@ -13,11 +12,6 @@ import com.example.faunaapp.MVVM.RoomModel.TaskEntry.ITaskEntryModel;
 import com.example.faunaapp.MVVM.RoomModel.TaskEntry.TaskEntryModel;
 import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.AddTaskEntry.AddTaskEntryRemoteDataSource;
 import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.AddTaskEntry.IAddTaskEntryRemoteDataSource;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-
-import java.util.List;
 
 public class AddTaskEntryRepository implements IAddTaskEntryRepository {
 

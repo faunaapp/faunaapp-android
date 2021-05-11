@@ -27,11 +27,11 @@
         android:label="AllCalendarEntriesFragment" >
         <action
             android:id="@+id/action_allCalendarEntriesFragment_to_addEntryFragmentView"
-            app:destination="@id/addEntryFragmentView" />
+            app:destination="@id/addTaskEntryFragmentView" />
     </fragment>
     <fragment
-        android:id="@+id/addEntryFragmentView"
-        android:name="com.example.faunaapp.MVVM.View.Fragments.AddEntryFragmentView"
+        android:id="@+id/addTaskEntryFragmentView"
+        android:name="com.example.faunaapp.MVVM.View.Fragments.AddTaskEntryFragmentView"
         android:label="AddEntryFragmentView" >
         <action
             android:id="@+id/action_addEntryFragmentView_to_allCalendarEntriesFragment"

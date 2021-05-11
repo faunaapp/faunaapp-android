@@ -8,7 +8,8 @@ import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.apollographql.apollo.request.RequestHeaders;
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.DTO_and_Room_tables.TaskEntry;
+import com.example.faunaapp.Enum.CategoryEnum;
 import com.example.faunaapp.EventBusObjects.EntryEvent;
 import com.example.faunaapp.Helpers.Helper;
 import com.faunaapp.graphql.CreateTaskMutation;
@@ -30,7 +31,7 @@ public class AddTaskEntryRemoteDataSource implements IAddTaskEntryRemoteDataSour
 
     @Override
     public void submit(TaskEntry taskEntry, String token) {
-        createTaskAsync.execute(token, getISO8601Format(taskEntry.getDate(), taskEntry.getTime()), taskEntry.getHeading(), taskEntry.getTitle(), Category.MEDICINE.toString());
+        createTaskAsync.execute(token, getISO8601Format(taskEntry.getDate(), taskEntry.getTime()), taskEntry.getHeading(), taskEntry.getTitle(), taskEntry.getCategoryId()+"");
     }
 
     private String getISO8601Format(String date, String time) {
@@ -65,7 +66,8 @@ public class AddTaskEntryRemoteDataSource implements IAddTaskEntryRemoteDataSour
             Token(0),
             DateTime(1),
             Content(2),
-            Title(3);
+            Title(3),
+            Category(4);
             private final int value;
 
             TaskEntryIterator(int value) {
@@ -81,16 +83,17 @@ public class AddTaskEntryRemoteDataSource implements IAddTaskEntryRemoteDataSour
 
         @Override
         protected synchronized Void doInBackground(String... strings) {
-            Log.i("Tag", strings[TaskEntryIterator.Token.getValue()] + " : " + strings[TaskEntryIterator.DateTime.getValue()] + " : " + strings[TaskEntryIterator.Content.getValue()] + " : " + strings[TaskEntryIterator.Title.getValue()]);
-            apolloClient.mutate(new CreateTaskMutation(strings[TaskEntryIterator.DateTime.getValue()], strings[TaskEntryIterator.Content.getValue()], strings[TaskEntryIterator.Title.getValue()], Category.APPOINTMENT))
+
+            apolloClient.mutate(new CreateTaskMutation(strings[TaskEntryIterator.DateTime.getValue()], strings[TaskEntryIterator.Content.getValue()], strings[TaskEntryIterator.Title.getValue()], getCategory(strings[TaskEntryIterator.Category.value])))
                     .toBuilder().requestHeaders(RequestHeaders.builder().addHeader("authorization", strings[0]).build()).build()
-                    .enqueue(new ApolloCall.Callback<CreateTaskMutation.Data>() {
+                    .enqueue(new ApolloCall.Callback<CreateTaskMutation.Data>()
+                    {
 
                         @Override
                         public void onResponse(@NotNull Response<CreateTaskMutation.Data> response) {
                             String date = Helper.getDateAndTimeFromISO8601(strings[TaskEntryIterator.DateTime.getValue()]).first;
                             String time = Helper.getDateAndTimeFromISO8601(strings[TaskEntryIterator.DateTime.getValue()]).second;
-                            newTaskEntry = new TaskEntry(strings[TaskEntryIterator.Content.getValue()], strings[TaskEntryIterator.Title.getValue()], "Something important", date, time);
+                            newTaskEntry = new TaskEntry(strings[TaskEntryIterator.Content.getValue()], strings[TaskEntryIterator.Title.getValue()], "Something important", date, time, strings[TaskEntryIterator.Category.value]);
                             EntryEvent entryEvent = new EntryEvent();
                             entryEvent.setTaskEntry(newTaskEntry);
                             EventBus.getDefault().post(entryEvent);
@@ -103,6 +106,19 @@ public class AddTaskEntryRemoteDataSource implements IAddTaskEntryRemoteDataSour
                     });
             return null;
 
+        }
+        private Category getCategory(String enumeration)
+        {
+            System.out.println("Enumiration: " + enumeration);
+            if(enumeration.equals("0"))
+                return Category.MEDICINE;
+            if(enumeration.equals("1"))
+                return Category.FOOD;
+            if(enumeration.equals("2"))
+                return Category.ACTIVITY;
+            if(enumeration.equals("3"))
+                return Category.APPOINTMENT;
+            return Category.HEAT;
         }
     }
 }

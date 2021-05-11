@@ -14,7 +14,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.DTO_and_Room_tables.TaskEntry;
 import com.example.faunaapp.MVVM.RecyclerView.Adapters.EntriesAdapter;
 import com.example.faunaapp.R;
 import com.example.faunaapp.MVVM.View.Activities.MainActivity;

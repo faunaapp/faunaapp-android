@@ -6,7 +6,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.DTO_and_Room_tables.TaskEntry;
 
 
 import com.example.faunaapp.MVVM.Repository.AddTaskEntry.AddTaskEntryRepository;
@@ -17,21 +17,19 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AddEntryFragmentViewModel extends AndroidViewModel {
+public class AddTaskEntryFragmentViewModel extends AndroidViewModel {
     private String constantDateText, constantTimeText;
-    private ExecutorService executorService;
     private MutableLiveData<String> date, time, error;
     private IAddTaskEntryRepository entryRepository;
 
 
-    public AddEntryFragmentViewModel(Application application) {
+    public AddTaskEntryFragmentViewModel(Application application) {
         super(application);
         constantDateText = "Vælg dato";
         constantTimeText = "Tidspunkt";
         date = new MutableLiveData<>();
         time = new MutableLiveData<>();
         error = new MutableLiveData<>();
-        executorService = Executors.newFixedThreadPool(2);
 
         entryRepository = new AddTaskEntryRepository(application);
     }

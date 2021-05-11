@@ -6,7 +6,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.DTO_and_Room_tables.TaskEntry;
 
 import com.example.faunaapp.EventBusObjects.EntriesEvent;
 import com.example.faunaapp.EventBusObjects.EntryEvent;

@@ -26,8 +26,8 @@ public class AllCalendarEntriesRepository implements IAllCalendarEntriesReposito
 
     @Override
     public void getAllEntries(String token) {
-        //taskEntryModel.getAllEntries();
-        allCalendarEntriesDataSource.getAllEntries(token);
+        taskEntryModel.getAllEntries();
+       // allCalendarEntriesDataSource.getAllEntries(token);
     }
 
     private ApolloClient initializeApolloClient() {

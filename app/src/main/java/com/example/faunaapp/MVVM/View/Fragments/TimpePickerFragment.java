@@ -13,11 +13,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class TimpePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
-    private AddEntryFragmentView addEntryFragmentView;
+    private AddTaskEntryFragmentView addTaskEntryFragmentView;
     @SuppressLint("SetTextI18n")
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        addEntryFragmentView.chooseTime(hourOfDay+ " : " + minute);
+        addTaskEntryFragmentView.chooseTime(hourOfDay+ " : " + minute);
     }
     @NotNull
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -25,9 +25,9 @@ public class TimpePickerFragment extends DialogFragment implements TimePickerDia
         return timePickerDialog;
     }
 
-    public void setFragment(AddEntryFragmentView addEntryFragmentView)
+    public void setFragment(AddTaskEntryFragmentView addTaskEntryFragmentView)
     {
-        this.addEntryFragmentView = addEntryFragmentView;
+        this.addTaskEntryFragmentView = addTaskEntryFragmentView;
     }
 
 

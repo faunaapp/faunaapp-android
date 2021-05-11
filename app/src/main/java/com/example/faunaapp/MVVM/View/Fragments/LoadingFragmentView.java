@@ -9,12 +9,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import com.example.faunaapp.MVVM.View_model.LoadingViewModel;
 import com.example.faunaapp.R;
 
 public class LoadingFragmentView extends Fragment {
     private View loadingView;
+    private LoadingViewModel loadingViewModel;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +27,8 @@ public class LoadingFragmentView extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         loadingView = inflater.inflate(R.layout.loading_fragment, container, false);
+        loadingViewModel = new ViewModelProvider(this).get(LoadingViewModel.class);
+        seedCategories();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -32,5 +37,9 @@ public class LoadingFragmentView extends Fragment {
             }
         }, 3000);
         return loadingView;
+    }
+
+    private void seedCategories(){
+        loadingViewModel.seedCategories();
     }
 }

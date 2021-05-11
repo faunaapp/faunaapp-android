@@ -8,7 +8,7 @@ import com.apollographql.apollo.ApolloClient;
 import com.apollographql.apollo.api.Response;
 import com.apollographql.apollo.exception.ApolloException;
 import com.apollographql.apollo.request.RequestHeaders;
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.DTO_and_Room_tables.TaskEntry;
 import com.example.faunaapp.EventBusObjects.EntriesEvent;
 import com.example.faunaapp.Helpers.Helper;
 import com.faunaapp.graphql.GetTasksQuery;
@@ -64,7 +64,7 @@ public class AllCalendarEntriesDataSource implements IALLCalendarEntriesDataSour
                             System.out.println(task.dateTime());
                             String date = Helper.getDateAndTimeFromISO8601(task.dateTime()).first;
                             String time = Helper.getDateAndTimeFromISO8601(task.dateTime()).second;
-                            entries.add(new TaskEntry(task.content(), task.title(), date, time));
+                            entries.add(new TaskEntry(task.content(), task.title(), date, time, 0));
                         }
                         EntriesEvent event = new EntriesEvent();
                         event.setEntries(entries);

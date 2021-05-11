@@ -1,6 +1,6 @@
 package com.example.faunaapp.EventBusObjects;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.DTO_and_Room_tables.TaskEntry;
 
 import java.util.ArrayList;
 import java.util.List;

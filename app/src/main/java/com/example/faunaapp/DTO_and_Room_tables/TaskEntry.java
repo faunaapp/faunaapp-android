@@ -1,4 +1,4 @@
-package com.example.faunaapp.DTO;
+package com.example.faunaapp.DTO_and_Room_tables;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey;
 public class TaskEntry {
     @PrimaryKey(autoGenerate = true)
     private int id;
+    private int categoryId;
     private String heading, title, description, date, time, token;
 
     public void setToken(String token) {
@@ -26,28 +27,37 @@ public class TaskEntry {
         this.id = id;
     }
 
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public TaskEntry() {
     }
 
     @Ignore
     public TaskEntry(String heading, String title, String description, String date, String time, String token) {
-        this(heading, title, description, date, time);
+        this(heading, title, description, date, time, 1);
         this.token = token;
     }
 
     @Ignore
-    public TaskEntry(String heading, String title, String description, String date, String time)
+    public TaskEntry(String heading, String title, String description, String date, String time, int categoryId)
     {
-        this(heading, title, date, time);
+        this(heading, title, date, time, categoryId);
         this.description = description;
     }
     @Ignore
-    public TaskEntry(String heading, String title, String date, String time)
+    public TaskEntry(String heading, String title, String date, String time, int categoryId)
     {
         this.heading = heading;
         this.title = title;
         this.date = date;
         this.time = time;
+        this.categoryId = categoryId;
     }
 
     public void setHeading(String heading) {

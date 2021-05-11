@@ -3,10 +3,14 @@ package com.example.faunaapp.MVVM.View.Fragments;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PatternMatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,11 +19,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.DTO_and_Room_tables.TaskEntry;
 import com.example.faunaapp.Helpers.Helper;
 import com.example.faunaapp.R;
 import com.example.faunaapp.MVVM.View.Activities.MainActivity;
-import com.example.faunaapp.MVVM.View_model.AddEntryFragmentViewModel;
+import com.example.faunaapp.MVVM.View_model.AddTaskEntryFragmentViewModel;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -27,8 +31,13 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class AddEntryFragmentView extends Fragment {
+public class AddTaskEntryFragmentView extends Fragment implements AdapterView.OnItemSelectedListener {
+    private String textFromSpinner;
+    private int categoryId;
     private View addEntryView;
     private Button dateButton, timeButton, saveButton;
     private MaterialDatePicker<Long> datePicker;
@@ -36,9 +45,10 @@ public class AddEntryFragmentView extends Fragment {
     private TextInputLayout headingTextInput, titleTextInput, noteTextInput;
     private TimpePickerFragment timePickerFragment;
     private TaskEntry taskEntryToSubmit;
+    private Spinner spinner;
 
 
-    private AddEntryFragmentViewModel addEntryFragmentViewModel;
+    private AddTaskEntryFragmentViewModel addTaskEntryFragmentViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,13 +62,12 @@ public class AddEntryFragmentView extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         addEntryView = inflater.inflate(R.layout.add_task_entry_fragment, container, false);
-
         initializeFragmentValues();
         timePickerFragment.setFragment(this);
         dateButton.setOnClickListener(view -> {
             datePicker.show(fragmentManager, "tag");
             datePicker.addOnPositiveButtonClickListener(selection -> {
-                addEntryFragmentViewModel.chooseDate(getFormatDate(selection, "dd/MM/yyyy"));
+                addTaskEntryFragmentViewModel.chooseDate(getFormatDate(selection, "dd/MM/yyyy"));
             });
         });
         timeButton.setOnClickListener(view -> {
@@ -67,8 +76,8 @@ public class AddEntryFragmentView extends Fragment {
         saveButton.setOnClickListener(view -> {
             SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
             String token = prefs.getString("token", "No token provided");
-            taskEntryToSubmit = new TaskEntry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), getClearDateOrTime(dateButton.getText().toString()), getClearDateOrTime(timeButton.getText().toString()));
-            addEntryFragmentViewModel.submitTheEntry(taskEntryToSubmit, token);
+            taskEntryToSubmit = new TaskEntry(headingTextInput.getEditText().getText().toString(), titleTextInput.getEditText().getText().toString(), noteTextInput.getEditText().getText().toString(), getClearDateOrTime(dateButton.getText().toString()), getClearDateOrTime(timeButton.getText().toString()), categoryId);
+             addTaskEntryFragmentViewModel.submitTheEntry(taskEntryToSubmit, token);
         });
 
         return addEntryView;
@@ -91,7 +100,7 @@ public class AddEntryFragmentView extends Fragment {
     }
 
     public void chooseTime(String time) {
-        addEntryFragmentViewModel.chooseTime(time);
+        addTaskEntryFragmentViewModel.chooseTime(time);
     }
 
     private MaterialDatePicker<Long> getDatePickers() {
@@ -118,19 +127,25 @@ public class AddEntryFragmentView extends Fragment {
         noteTextInput = addEntryView.findViewById(R.id.fragment_add_task_entry_textInput_note_input_id);
         saveButton = addEntryView.findViewById(R.id.fragment_add_task_entry_save_button_id);
         datePicker = getDatePickers();
-        addEntryFragmentViewModel = new ViewModelProvider(this).get(AddEntryFragmentViewModel.class);
+        spinner = (Spinner) addEntryView.findViewById(R.id.spinner_add_task_entry_fragment);
+        spinner.setOnItemSelectedListener(this);
+        addTaskEntryFragmentViewModel = new ViewModelProvider(this).get(AddTaskEntryFragmentViewModel.class);
         timePickerFragment = new TimpePickerFragment();
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(), R.array.categories_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
         setUpObserver();
     }
 
     private void setUpObserver() {
-        addEntryFragmentViewModel.getDate().observe(getViewLifecycleOwner(), date -> {
+        addTaskEntryFragmentViewModel.getDate().observe(getViewLifecycleOwner(), date -> {
             dateButton.setText(date);
         });
-        addEntryFragmentViewModel.getTime().observe(getViewLifecycleOwner(), time -> {
+        addTaskEntryFragmentViewModel.getTime().observe(getViewLifecycleOwner(), time -> {
             timeButton.setText(time);
         });
-        addEntryFragmentViewModel.getError().observe(getViewLifecycleOwner(), error -> {
+        addTaskEntryFragmentViewModel.getError().observe(getViewLifecycleOwner(), error -> {
             if (error.equals("")) {
                 Navigation.findNavController(addEntryView).navigate(R.id.action_addEntryFragmentView_to_allCalendarEntriesFragment);
 
@@ -138,5 +153,23 @@ public class AddEntryFragmentView extends Fragment {
                 Helper.setSnackbar(addEntryView, error);
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        textFromSpinner = parent.getItemAtPosition(position).toString();
+        Pattern p = Pattern.compile("[0-9]");
+        Matcher m = p.matcher(textFromSpinner);
+        if(m.find())
+        {
+            categoryId = Integer.parseInt(Objects.requireNonNull(m.group(0)));
+            categoryId--;
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

@@ -6,13 +6,11 @@
     android:layout_height="match_parent">
 
 
-
-
     <TextView
         android:id="@+id/fragment_add_entry_title_id"
-        android:layout_width="194dp"
-        android:layout_height="37dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="196dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="4dp"
         android:text="@string/fragment_add_entry_title_name"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,7 +25,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/fragment_add_task_entry_heading_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_entry_title_id" />
 
@@ -46,22 +44,22 @@
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_heading_id">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:text="@string/fragment_login_text_input_heading_id"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:text="@string/fragment_login_text_input_heading_id" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <TextView
         android:id="@+id/fragment_add_task_entry_topic_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="@string/fragment_add_task_entry_topic_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_input_email_input_id" />
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/fragment_add_task_entry_text_topic_input_id"
@@ -77,11 +75,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_topic_id">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:text="@string/fragment_add_task_entry_textInput_textEdit"
-                    android:layout_height="match_parent"
-                    android:inputType="textPassword" />
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"
+            android:text="@string/fragment_add_task_entry_textInput_textEdit" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -116,10 +114,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
-
-
     <TextView
         android:id="@+id/fragment_add_task_entry_text_date_and_time_id"
         android:layout_width="wrap_content"
@@ -129,21 +123,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_textInput_note_input_id" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner_add_task_entry_fragment" />
 
     <Button
         android:id="@+id/fragment_add_task_entry_text_date_button_id"
         android:layout_width="151dp"
         android:layout_height="93dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="8dp"
-        android:drawableTop="@drawable/ic_calendar"
 
+        android:drawableTop="@drawable/ic_calendar"
         android:drawableTint="@color/white_50"
         android:text="@string/fragment_add_task_entry_text_date_button_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_date_and_time_id"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_date_and_time_id" />
 
     <Button
         android:id="@+id/fragment_add_task_entry_text_time_button_id"
@@ -161,20 +154,21 @@
         android:id="@+id/fragment_add_task_entry_text_add_photos_or_videos_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:text="@string/fragment_add_task_entry_text_add_photos_or_videos_title"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_time_button_id" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_date_button_id" />
 
     <ImageButton
         android:id="@+id/fragment_add_task_entry_image_button_id"
         android:layout_width="142dp"
         android:layout_height="78dp"
-        android:layout_marginTop="20dp"
         android:backgroundTint="@color/teal_700"
         android:contentDescription="@string/fragment_add_task_entry_image_button_description"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_add_photos_or_videos_id"
         app:srcCompat="@android:drawable/ic_menu_add" />
@@ -183,13 +177,20 @@
         android:id="@+id/fragment_add_task_entry_save_button_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="12dp"
         android:backgroundTint="@color/teal_700"
         android:text="@string/fragment_add_task_entry_save_button_text"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_image_button_id"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_image_button_id" />
+
+    <Spinner
+        android:id="@+id/spinner_add_task_entry_fragment"
+        android:layout_width="412dp"
+        android:layout_height="59dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_textInput_note_input_id" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
