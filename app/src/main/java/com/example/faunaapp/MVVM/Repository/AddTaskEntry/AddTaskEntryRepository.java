@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.apollographql.apollo.ApolloClient;
 import com.example.faunaapp.DTO.TaskEntry;
+import com.example.faunaapp.EventBusObjects.TokenEvent;
 import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApollo;
 import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApolloComponent;
 
@@ -13,18 +14,25 @@ import com.example.faunaapp.MVVM.RoomModel.TaskEntry.TaskEntryModel;
 import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.AddTaskEntry.AddTaskEntryRemoteDataSource;
 import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.AddTaskEntry.IAddTaskEntryRemoteDataSource;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.util.List;
+
 public class AddTaskEntryRepository implements IAddTaskEntryRepository {
 
     private static ApolloClient apolloClient;
     private IAddTaskEntryRemoteDataSource addTaskEntryRemoteDataSource;
-    private ITaskEntryModel taskTaskEntryModel;
+    private ITaskEntryModel taskEntryModel;
 
 
     public AddTaskEntryRepository(Application application) {
         apolloClient = initializeApolloClient();
         addTaskEntryRemoteDataSource = new AddTaskEntryRemoteDataSource(apolloClient);
-        taskTaskEntryModel = new TaskEntryModel(application);
+        taskEntryModel = TaskEntryModel.getInstance(application);
     }
+
+
 
     private ApolloClient initializeApolloClient() {
         ClientApolloComponent component = DaggerClientApolloComponent.create();
@@ -35,7 +43,7 @@ public class AddTaskEntryRepository implements IAddTaskEntryRepository {
 
     @Override
     public void submit(TaskEntry taskEntry, String token) {
-        taskTaskEntryModel.insertTaskEntry(taskEntry);
+        taskEntryModel.insertTaskEntry(taskEntry);
         addTaskEntryRemoteDataSource.submit(taskEntry, token);
     }
 }

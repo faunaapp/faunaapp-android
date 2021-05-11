@@ -12,13 +12,13 @@ import java.util.List;
 
 @Dao
 public interface TaskEntryDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert
     void insert(TaskEntry taskEntry);
 
 //    @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    void insertAll(List<TaskEntry> tasksEntry);
 
     @Query("SELECT * FROM entry_table")
-    LiveData<List<TaskEntry>> getAllEntries();
+    List<TaskEntry> getAllEntries();
 
 }

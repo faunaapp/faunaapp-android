@@ -30,7 +30,7 @@ public class AllCalendarEntriesFragmentView extends Fragment {
     private AllCalendarEntriesFragmentViewModel allCalendarEntriesFragmentViewModel;
     private FloatingActionButton addButton;
     private RecyclerView futureAppointemtsRecyclerView, pastAppointmentsRecyclerView;
-    private static ArrayList<TaskEntry> futureAppointments,pastAppointments ;
+    private static ArrayList<TaskEntry> futureAppointments, pastAppointments;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,7 +42,7 @@ public class AllCalendarEntriesFragmentView extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         allCalendarEntriesView = inflater.inflate(R.layout.all_calendar_entries_fragment, container, false);
         initializeFragmentsValues();
-        addButton.setOnClickListener( view -> {
+        addButton.setOnClickListener(view -> {
             Navigation.findNavController(allCalendarEntriesView).navigate(R.id.action_allCalendarEntriesFragment_to_addEntryFragmentView);
         });
 
@@ -51,11 +51,11 @@ public class AllCalendarEntriesFragmentView extends Fragment {
 
     private void initializeFragmentsValues() {
         allCalendarEntriesFragmentViewModel = new ViewModelProvider(this).get(AllCalendarEntriesFragmentViewModel.class);
-        addButton =  allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_button_add);
+        addButton = allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_button_add);
         futureAppointemtsRecyclerView = allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_futureAppointments_recycler_view_id);
         pastAppointmentsRecyclerView = allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_pastAppointments_recycler_view_id);
         setUpObserver();
-        if(futureAppointments == null && pastAppointments == null) {
+        if (futureAppointments == null && pastAppointments == null) {
             SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
             String token = prefs.getString("token", "No token provided");
             allCalendarEntriesFragmentViewModel.getAllTasks(token);
@@ -71,14 +71,16 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         recyclerView.setAdapter(entriesAdapter);
     }
 
-    private void setUpObserver(){
-        allCalendarEntriesFragmentViewModel.getEntries().observe(getViewLifecycleOwner(), list ->{
+    private void setUpObserver() {
+        allCalendarEntriesFragmentViewModel.getEntries().observe(getViewLifecycleOwner(), list -> {
             configureAppointments(list);
             setUpRecycleViews();
         });
-        allCalendarEntriesFragmentViewModel.getNewEntry().observe(getViewLifecycleOwner(), entry-> {
-            futureAppointments.add(entry);
-            setUpRecycleViews();
+        allCalendarEntriesFragmentViewModel.getNewEntry().observe(getViewLifecycleOwner(), entry -> {
+            if (futureAppointments != null) {
+                futureAppointments.add(entry);
+                setUpRecycleViews();
+            }
         });
     }
 
@@ -89,46 +91,40 @@ public class AllCalendarEntriesFragmentView extends Fragment {
 
     private void configureAppointments(List<TaskEntry> list) {
 
-        if(futureAppointments == null && pastAppointments == null) {
+        if (futureAppointments == null && pastAppointments == null) {
             futureAppointments = new ArrayList<>();
             pastAppointments = new ArrayList<>();
         }
 
         for (int i = 0; i < list.size(); i++) {
-           if(hasToGoToThePastAppointment(list.get(i))){
-               pastAppointments.add(list.get(i));
-           }
-           else{
-               futureAppointments.add(list.get(i));
-           }
+            if (hasToGoToThePastAppointment(list.get(i))) {
+                pastAppointments.add(list.get(i));
+            } else {
+                futureAppointments.add(list.get(i));
+            }
         }
     }
 
     private boolean hasToGoToThePastAppointment(TaskEntry taskEntry) {
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-        int currentMonth = Calendar.getInstance().get(Calendar.MONTH)+1;
+        int currentMonth = Calendar.getInstance().get(Calendar.MONTH) + 1;
         int currentDay = Calendar.getInstance().get(Calendar.DATE);
         int currentHour = Calendar.getInstance().get(Calendar.HOUR);
         int currentMinute = Calendar.getInstance().get(Calendar.MINUTE);
-        String [] date = taskEntry.getDate().split("/");
-        int year  = Integer.parseInt(date[2]);
+        String[] date = taskEntry.getDate().split("/");
+        int year = Integer.parseInt(date[2]);
         int month = Integer.parseInt(date[1]);
         int day = Integer.parseInt(date[0]);
         String hours, minutes;
-        String [] times = taskEntry.getTime().split(":");
-        if(times[0].trim().length() == 1)
-        {
-            hours = "0"+times[0].trim();
-        }
-        else{
+        String[] times = taskEntry.getTime().split(":");
+        if (times[0].trim().length() == 1) {
+            hours = "0" + times[0].trim();
+        } else {
             hours = times[0].trim();
         }
-        if(times[1].trim().length() == 1)
-        {
-            minutes = "0"+times[1].trim();
-        }
-        else
-        {
+        if (times[1].trim().length() == 1) {
+            minutes = "0" + times[1].trim();
+        } else {
             minutes = times[1].trim();
         }
 
@@ -136,14 +132,11 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         int min = Integer.parseInt(minutes);
 
 
-        if(year < currentYear || (year == currentYear && month < currentMonth) || (year == currentYear && month == currentMonth && day < currentDay) ||
+        if (year < currentYear || (year == currentYear && month < currentMonth) || (year == currentYear && month == currentMonth && day < currentDay) ||
                 (year == currentYear && month == currentMonth && day == currentDay && hr < currentHour) ||
-                (year == currentYear && month == currentMonth && day == currentDay && hr == currentHour && min < currentMinute)  )
-        {
+                (year == currentYear && month == currentMonth && day == currentDay && hr == currentHour && min < currentMinute)) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

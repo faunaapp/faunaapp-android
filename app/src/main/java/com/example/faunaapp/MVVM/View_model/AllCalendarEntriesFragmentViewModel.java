@@ -52,7 +52,7 @@ public class AllCalendarEntriesFragmentViewModel extends AndroidViewModel {
     }
 
     public void getAllTasks(String token){
-            allCalendarEntriesRepository.getAllEntries(token);
+        allCalendarEntriesRepository.getAllEntries(token);
     }
 
     public LiveData<TaskEntry> getNewEntry(){

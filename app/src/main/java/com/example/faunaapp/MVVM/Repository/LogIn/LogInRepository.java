@@ -3,11 +3,17 @@ package com.example.faunaapp.MVVM.Repository.LogIn;
 import android.app.Application;
 
 import com.apollographql.apollo.ApolloClient;
+import com.example.faunaapp.EventBusObjects.TokenEvent;
 import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApollo;
 import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.ClientApolloComponent;
 import com.example.faunaapp.MVVM.RemoteDataSource.ApolloClient.DaggerClientApolloComponent;
 import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.LogIn.ILogInRemoteDataSource;
 import com.example.faunaapp.MVVM.RemoteDataSource.RemouteSource.LogIn.LogInRemoteDataSource;
+import com.example.faunaapp.MVVM.RoomModel.TaskEntry.ITaskEntryModel;
+import com.example.faunaapp.MVVM.RoomModel.TaskEntry.TaskEntryModel;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 
 public class LogInRepository implements ILogInRepository {
@@ -18,7 +24,6 @@ public class LogInRepository implements ILogInRepository {
     public LogInRepository(Application application) {
         apolloClient = initializeApolloClient();
         logInRemoteDataSource = new LogInRemoteDataSource(apolloClient);
-       //TODO To make Room here
     }
 
 

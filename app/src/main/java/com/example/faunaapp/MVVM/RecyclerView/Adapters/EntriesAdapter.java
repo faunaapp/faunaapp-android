@@ -35,6 +35,7 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
        holder.time.setText(entries.get(position).getTime());
        holder.title.setText(entries.get(position).getTitle());
        holder.content.setText(entries.get(position).getHeading());
+       holder.category.setText(entries.get(position).getId());
     }
 
 
@@ -49,13 +50,14 @@ public class EntriesAdapter extends RecyclerView.Adapter<EntriesAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView date, time, title, content;
+        TextView date, time, title, content, category;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             date = itemView.findViewById(R.id.entry_item_title_template_text_date_id);
             time = itemView.findViewById(R.id.entry_item_time_template_text_id);
             title = itemView.findViewById(R.id.entry_item_title_id);
             content = itemView.findViewById(R.id.entry_item_content_id);
+            category = itemView.findViewById(R.id.categoryId);
         }
     }
 }

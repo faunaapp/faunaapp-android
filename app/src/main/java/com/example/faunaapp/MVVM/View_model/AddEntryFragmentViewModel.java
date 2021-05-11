@@ -26,7 +26,6 @@ public class AddEntryFragmentViewModel extends AndroidViewModel {
 
     public AddEntryFragmentViewModel(Application application) {
         super(application);
-
         constantDateText = "Vælg dato";
         constantTimeText = "Tidspunkt";
         date = new MutableLiveData<>();
@@ -47,12 +46,14 @@ public class AddEntryFragmentViewModel extends AndroidViewModel {
 
     public void submitTheEntry(TaskEntry taskEntry, String token) {
         String errorMessage = getErrorIfExists(taskEntry);
-        entryRepository.submit(taskEntry, token);
+
         if (!errorMessage.equals("")) {
             error.postValue(errorMessage);
             return;
         }
         error.postValue("");
+        entryRepository.submit(taskEntry, token);
+
     }
 
     private String getErrorIfExists(TaskEntry taskEntry) {

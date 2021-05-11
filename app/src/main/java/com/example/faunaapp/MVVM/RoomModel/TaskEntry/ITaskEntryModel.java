@@ -8,6 +8,5 @@ import java.util.List;
 
 public interface ITaskEntryModel {
      void insertTaskEntry(TaskEntry taskEntry);
-     void insertAllTaskEntry(List<TaskEntry> taskEntries);
-     LiveData<List<TaskEntry>> getAllEntries();
+     void getAllEntries();
 }
