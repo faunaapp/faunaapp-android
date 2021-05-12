@@ -53,6 +53,7 @@ public class AddTaskEntryFragmentView extends Fragment implements AdapterView.On
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
 
