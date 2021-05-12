@@ -2,27 +2,42 @@
     <string name="app_name">Fauna</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="fauna">Fauna</string>
-    <string name="email">Email</string>
-    <string name="adgangskode">Adgangskode</string>
-    <string name="log_ind">Log ind</string>
-    <string name="dog_picture">dog_picture</string>
-    <string name="forgot_password">Glemt adgangskode?</string>
-    <string name="create_account">Gå til tilmelding</string>
-    <string name="kommende_aftaler">Kommende aftaler</string>
-    <string name="tidligere_aftaler">Tidligere aftaler</string>
-    <string name="lav_en_ny_p_mindelse">Lav en ny påmindelse</string>
-    <string name="overskrift">Overskrift</string>
-    <string name="emne">Emne</string>
+    <string name="fragment_login_heading_fauna">Fauna</string>
+    <string name="fragment_login_text_input_email_input">Email</string>
+    <string name="fragment_login_text_password_input_hint">Adgangskode</string>
+    <string name="fragment_login_button_login_namr">Log ind</string>
+    <string name="fragment_login_picture_dog">dog_picture</string>
+    <string name="fragment_login_button_forgot_password_name">Glemt adgangskode?</string>
+    <string name="fragment_login_button_register_name">Gå til tilmelding</string>
+    <string name="fragment_all_calendar_entries_future_appointments_name">Kommende aftaler</string>
+    <string name="fragment_all_calendar_entries_past_appointments_name">Tidligere aftaler</string>
+    <string name="fragment_add_entry_title_name">Lav en ny påmindelse</string>
+    <string name="fragment_add_task_entry_heading_text">Overskrift</string>
+    <string name="fragment_add_task_entry_topic_text">Emne</string>
     <string name="button">Button</string>
     <string name="dato_og_tidspunkt">Dato og tidspunkt</string>
-    <string name="noter">Noter</string>
-    <string name="v_lg_dato">Vælg dato</string>
-    <string name="tidspunkt">Tidspunkt</string>
-    <string name="tilf_j_billeder_eller_filer_til_aftalen">Tilføj billeder eller filer til aftalen</string>
-    <string name="add_image">Add image</string>
-    <string name="opret_p_mindelse">Opret påmindelse</string>
+    <string name="fragment_add_task_entry_text_note_input_text">Noter</string>
+    <string name="fragment_add_task_entry_text_date_button_text">Vælg dato</string>
+    <string name="fragment_add_task_entry_text_time_button_text">Tidspunkt</string>
+    <string name="fragment_add_task_entry_text_add_photos_or_videos_title">Tilføj billeder eller filer til aftalen</string>
+    <string name="fragment_add_task_entry_image_button_description">Add image</string>
+    <string name="fragment_add_task_entry_save_button_text">Opret påmindelse</string>
     <string name="hundefris_r">Hundefrisør</string>
     <string name="pelspleje">Pelspleje</string>
     <string name="lorem_ipsum_dolor_sit_ame">Lorem ipsum dolor sit ame</string>
+    <string name="fragment_login_text_input_edit_template_text">alice@faunaapp.dk</string>
+    <string name="fragment_login_password_input_edit_template_text">1234</string>
+    <string name="entry_item_title_template_text">Kloklip</string>
+    <string name="entry_item_content_text">Title template</string>
+    <string name="entry_item_title_template_date_text">Title template</string>
+    <string name="entry_item_time_template_text">Time templater</string>
+    <string name="fragment_login_text_input_heading_id">blablabla</string>
+    <string name="fragment_add_task_entry_textInput_textEdit">bigBlaBla</string>
+    <string-array name="categories_array">
+        <item>1. MEDICATION</item>
+        <item>2. FOOD</item>
+        <item>3. ACTIVITY</item>
+        <item>4. APPOINTMENT</item>
+        <item>5. HEAT</item>
+    </string-array>
 </resources>

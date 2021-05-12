@@ -9,12 +9,12 @@ Pet owners want digital access to their pet's welfare, where animal clinics want
 
 As a pet owner, I must be able to login so I can access personal app content
 
-As a pet owner, I must be able to create a new calendar entry so I can be reminded later
+As a pet owner, I must be able to create a new calendar taskEntry so I can be reminded later
 
 As a pet owner, I must be able to see a list of all my calendar entries so I can keep myself informed
 
-As a pet owner, I should be able to add other users to a calendar entry so I can share the responsibility
+As a pet owner, I should be able to add other users to a calendar taskEntry so I can share the responsibility
 
-As a pet owner, I should be able to add a category to a calendar entry so I can easily tell the context
+As a pet owner, I should be able to add a category to a calendar taskEntry so I can easily tell the context
 
 As a pet owner, I could be able to logout so another user can login

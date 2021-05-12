@@ -57,7 +57,7 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.2.0'
 
 
-    def daggerVer = 2.27 // or latest version
+    def daggerVer = "2.35.1" // or latest version
 
     implementation "com.google.dagger:dagger:$daggerVer"
     implementation "com.google.dagger:dagger-android-support:$daggerVer"
