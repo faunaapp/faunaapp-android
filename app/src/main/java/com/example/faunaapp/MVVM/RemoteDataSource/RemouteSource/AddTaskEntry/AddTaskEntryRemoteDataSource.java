@@ -93,7 +93,7 @@ public class AddTaskEntryRemoteDataSource implements IAddTaskEntryRemoteDataSour
                         public void onResponse(@NotNull Response<CreateTaskMutation.Data> response) {
                             String date = Helper.getDateAndTimeFromISO8601(strings[TaskEntryIterator.DateTime.getValue()]).first;
                             String time = Helper.getDateAndTimeFromISO8601(strings[TaskEntryIterator.DateTime.getValue()]).second;
-                            newTaskEntry = new TaskEntry(strings[TaskEntryIterator.Content.getValue()], strings[TaskEntryIterator.Title.getValue()], "Something important", date, time, strings[TaskEntryIterator.Category.value]);
+                            newTaskEntry = new TaskEntry(strings[TaskEntryIterator.Content.getValue()], strings[TaskEntryIterator.Title.getValue()], "Something important", date, time, Integer.parseInt(strings[TaskEntryIterator.Category.value]));
                             EntryEvent entryEvent = new EntryEvent();
                             entryEvent.setTaskEntry(newTaskEntry);
                             EventBus.getDefault().post(entryEvent);

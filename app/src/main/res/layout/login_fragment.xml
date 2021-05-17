@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="328dp"
-        android:layout_height="330dp"
+        android:layout_width="263dp"
+        android:layout_height="304dp"
 
         android:contentDescription="@string/fragment_login_picture_dog"
         android:src="@mipmap/dog_fauna_foreground"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteY="-92dp" />
 
     <TextView
         android:id="@+id/fragment_login_heading_fauna_id"
-        android:theme="@style/TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="260dp"
-
         android:text="@string/fragment_login_heading_fauna"
         android:textSize="35sp"
+        android:theme="@style/TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.87" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/fragment_add_task_entry_text_input_email_input_id"
@@ -44,10 +45,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:text="@string/fragment_login_text_input_edit_template_text"
-            android:layout_height="match_parent" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/fragment_login_text_input_edit_template_text" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -73,23 +74,20 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fragment_login_button_login_id"
-        android:layout_width="329dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="340dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="12dp"
         android:text="@string/fragment_login_button_login_namr"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_add_task_entry_text_topic_input_id" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fragment_login_button_forgot_password_id"
-        android:layout_width="334dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="340dp"
+        android:layout_height="69dp"
         android:text="@string/fragment_login_button_forgot_password_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.558"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fragment_login_button_login_id" />
 
@@ -113,10 +111,10 @@
         android:text="@string/fragment_login_button_register_name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.539"
+        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view2"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,6 +33,7 @@
     <string name="entry_item_time_template_text">Time templater</string>
     <string name="fragment_login_text_input_heading_id">blablabla</string>
     <string name="fragment_add_task_entry_textInput_textEdit">bigBlaBla</string>
+    <string name="log_out_main_menu_title">Log ud</string>
     <string-array name="categories_array">
         <item>1. MEDICATION</item>
         <item>2. FOOD</item>

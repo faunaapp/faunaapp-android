@@ -3,6 +3,7 @@ package com.example.faunaapp.MVVM.View.Fragments;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -31,6 +32,7 @@ public class AllCalendarEntriesFragmentView extends Fragment {
     private FloatingActionButton addButton;
     private RecyclerView futureAppointemtsRecyclerView, pastAppointmentsRecyclerView;
     private static ArrayList<TaskEntry> futureAppointments, pastAppointments;
+    private static boolean isFirstTimeAccessed = true;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,17 +51,18 @@ public class AllCalendarEntriesFragmentView extends Fragment {
         return allCalendarEntriesView;
     }
 
+
     private void initializeFragmentsValues() {
         allCalendarEntriesFragmentViewModel = new ViewModelProvider(this).get(AllCalendarEntriesFragmentViewModel.class);
         addButton = allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_button_add);
         futureAppointemtsRecyclerView = allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_futureAppointments_recycler_view_id);
         pastAppointmentsRecyclerView = allCalendarEntriesView.findViewById(R.id.fragment_all_calendar_entries_pastAppointments_recycler_view_id);
         setUpObserver();
-        if (futureAppointments == null && pastAppointments == null) {
-            SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
-            String token = prefs.getString("token", "No token provided");
-            allCalendarEntriesFragmentViewModel.getAllTasks(token);
-        }
+        futureAppointments = null;
+        pastAppointments = null;
+        SharedPreferences prefs = ((MainActivity) getActivity()).getTokenStorage();
+        String token = prefs.getString("token", "No token provided");
+        allCalendarEntriesFragmentViewModel.getAllTasks(token);
 
     }
 

@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_allCalendarEntriesFragment_to_addEntryFragmentView"
             app:destination="@id/addTaskEntryFragmentView" />
+        <action
+            android:id="@+id/action_allCalendarEntriesFragment_to_log_in"
+            app:destination="@id/log_in" />
     </fragment>
     <fragment
         android:id="@+id/addTaskEntryFragmentView"
@@ -36,5 +39,8 @@
         <action
             android:id="@+id/action_addEntryFragmentView_to_allCalendarEntriesFragment"
             app:destination="@id/allCalendarEntriesFragment" />
+        <action
+            android:id="@+id/action_addTaskEntryFragmentView_to_log_in"
+            app:destination="@id/log_in" />
     </fragment>
 </navigation>
