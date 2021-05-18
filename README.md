@@ -18,3 +18,7 @@ As a pet owner, I should be able to add other users to a calendar taskEntry so I
 As a pet owner, I should be able to add a category to a calendar taskEntry so I can easily tell the context (Implemented)
 
 As a pet owner, I could be able to logout so another user can login (Implemented)
+
+-------------------------------------------------------------------------------------------------------------------------------
+                                             Link to the video
+                                           https://youtu.be/ujAX8NuSn54
